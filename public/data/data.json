@@ -1,0 +1,202 @@
+[
+    {
+        "id":1,
+        "titulo":"Atardecer Urbano",
+        "descripcion":"Una obra vibrante que captura la energ\u00eda de la ciudad al atardecer.",
+        "precio":13656,
+        "medidas":"50x50 cm",
+        "url":"https://media.istockphoto.com/id/1006058610/photo/the-roof-car-park.jpg?s=2048x2048&w=is&k=20&c=UWC2vqRTP9r6AQHqqgj5MoP_FlSyl-bksUTrJSkF41s=",
+        "stock":3,
+        "categoria":"Paisaje"
+    },
+    {
+        "id":2,
+        "titulo":"Monta\u00f1a Eterna",
+        "descripcion":"Paisaje monta\u00f1oso que evoca paz y majestuosidad.",
+        "precio":13092,
+        "medidas":"60x40 cm",
+        "url":"https://cdn.pixabay.com/photo/2023/03/19/19/38/mountain-7863224_1280.jpg",
+        "stock":9,
+        "categoria":"Abstracto"
+    },
+    {
+        "id":3,
+        "titulo":"Reflejo del Alma",
+        "descripcion":"Retrato abstracto que invita a la introspecci\u00f3n.",
+        "precio":8466,
+        "medidas":"60x50 cm",
+        "url":"https://cdn.pixabay.com/photo/2019/01/24/11/31/structure-3952312_1280.jpg",
+        "stock":1,
+        "categoria":"Retrato"
+    },
+    {
+        "id":4,
+        "titulo":"Bosque Encantado",
+        "descripcion":"Representaci\u00f3n m\u00e1gica de un bosque encantado.",
+        "precio":10931,
+        "medidas":"50x30 cm",
+        "url":"https://cdn.pixabay.com/photo/2019/05/05/19/12/landscape-4181457_1280.jpg",
+        "stock":5,
+        "categoria":"Urbano"
+    },
+    {
+        "id":5,
+        "titulo":"Mares de Tranquilidad",
+        "descripcion":"Mar sereno bajo una luna brillante.",
+        "precio":12270,
+        "medidas":"50x40 cm",
+        "url":"https://cdn.pixabay.com/photo/2022/10/07/12/48/sea-7504986_1280.jpg",
+        "stock":10,
+        "categoria":"Naturaleza"
+    },
+    {
+        "id":6,
+        "titulo":"Abstracci\u00f3n Colorida",
+        "descripcion":"Composici\u00f3n abstracta llena de dinamismo y color.",
+        "precio":16484,
+        "medidas":"50x30 cm",
+        "url":"https://cdn.pixabay.com/photo/2022/02/22/03/14/painting-7027907_1280.jpg",
+        "stock":2,
+        "categoria":"Fant\u00e1stico"
+    },
+    {
+        "id":7,
+        "titulo":"Retrato Interior",
+        "descripcion":"Exploraci\u00f3n emocional a trav\u00e9s de un retrato expresivo.",
+        "precio":8321,
+        "medidas":"50x60 cm",
+        "url":"https://cdn.pixabay.com/photo/2016/08/16/17/20/elevators-1598431_1280.jpg",
+        "stock":7,
+        "categoria":"Minimalista"
+    },
+    {
+        "id":8,
+        "titulo":"Luz de Invierno",
+        "descripcion":"Escena nevada ba\u00f1ada por una suave luz invernal.",
+        "precio":15636,
+        "medidas":"50x40 cm",
+        "url":"https://cdn.pixabay.com/photo/2022/01/24/14/48/road-6963584_1280.jpg",
+        "stock":7,
+        "categoria":"Geometr\u00eda"
+    },
+    {
+        "id":9,
+        "titulo":"Horizonte Lejano",
+        "descripcion":"Vista panor\u00e1mica que transmite calma y esperanza.",
+        "precio":13142,
+        "medidas":"50x50 cm",
+        "url":"https://cdn.pixabay.com/photo/2019/12/28/21/28/planet-rise-4725820_1280.jpg",
+        "stock":4,
+        "categoria":"Surrealismo"
+    },
+    {
+        "id":10,
+        "titulo":"Callej\u00f3n de Recuerdos",
+        "descripcion":"Callej\u00f3n antiguo lleno de nostalgia y misterio.",
+        "precio":15618,
+        "medidas":"40x30 cm",
+        "url":"https://cdn.pixabay.com/photo/2013/12/18/18/46/toledo-230327_1280.jpg",
+        "stock":5,
+        "categoria":"Astral"
+    },
+    {
+        "id":11,
+        "titulo":"Sombras del Tiempo",
+        "descripcion":"Tiempos pasados revividos a trav\u00e9s de luces y sombras.",
+        "precio":12192,
+        "medidas":"50x50 cm",
+        "url":"https://cdn.pixabay.com/photo/2020/04/23/18/41/light-5083606_1280.jpg",
+        "stock":3,
+        "categoria":"Paisaje"
+    },
+    {
+        "id":12,
+        "titulo":"Viento y Arena",
+        "descripcion":"Desierto y viento, elementos en movimiento.",
+        "precio":14179,
+        "medidas":"30x40 cm",
+        "url":"https://cdn.pixabay.com/photo/2022/11/02/09/43/sand-7564466_1280.jpg",
+        "stock":3,
+        "categoria":"Abstracto"
+    },
+    {
+        "id":13,
+        "titulo":"Cumbre Solitaria",
+        "descripcion":"Monta\u00f1a solitaria representada con pinceladas firmes.",
+        "precio":11069,
+        "medidas":"40x30 cm",
+        "url":"https://cdn.pixabay.com/photo/2015/08/16/21/03/mountains-891597_1280.jpg",
+        "stock":1,
+        "categoria":"Retrato"
+    },
+    {
+        "id":14,
+        "titulo":"Jard\u00edn de Ensue\u00f1o",
+        "descripcion":"Jard\u00edn colorido que mezcla fantas\u00eda y realidad.",
+        "precio":12126,
+        "medidas":"30x60 cm",
+        "url":"https://cdn.pixabay.com/photo/2017/12/16/22/22/bora-bora-3023437_1280.jpg",
+        "stock":6,
+        "categoria":"Urbano"
+    },
+    {
+        "id":15,
+        "titulo":"Mirada Infinita",
+        "descripcion":"Ojos que parecen ver m\u00e1s all\u00e1 del cuadro.",
+        "precio":9225,
+        "medidas":"60x60 cm",
+        "url":"https://cdn.pixabay.com/photo/2017/07/31/16/33/woman-2558823_1280.jpg",
+        "stock":10,
+        "categoria":"Naturaleza"
+    },
+    {
+        "id":16,
+        "titulo":"Ecos del Silencio",
+        "descripcion":"Silencio convertido en imagen.",
+        "precio":18292,
+        "medidas":"60x40 cm",
+        "url":"https://cdn.pixabay.com/photo/2017/01/19/12/04/boat-1992136_1280.jpg",
+        "stock":10,
+        "categoria":"Fant\u00e1stico"
+    },
+    {
+        "id":17,
+        "titulo":"Ritmo Geom\u00e9trico",
+        "descripcion":"Dise\u00f1o geom\u00e9trico que juega con perspectiva y orden.",
+        "precio":14948,
+        "medidas":"40x30 cm",
+        "url":"https://cdn.pixabay.com/photo/2018/10/28/18/52/abstraction-3779581_1280.jpg",
+        "stock":2,
+        "categoria":"Minimalista"
+    },
+    {
+        "id":18,
+        "titulo":"Susurros del Bosque",
+        "descripcion":"Bosque susurrante lleno de vida.",
+        "precio":17527,
+        "medidas":"30x50 cm",
+        "url":"https://cdn.pixabay.com/photo/2014/09/07/22/17/forest-438432_1280.jpg",
+        "stock":7,
+        "categoria":"Geometr\u00eda"
+    },
+    {
+        "id":19,
+        "titulo":"Lluvia de Colores",
+        "descripcion":"Explosi\u00f3n de colores en una tormenta art\u00edstica.",
+        "precio":12006,
+        "medidas":"60x60 cm",
+        "url":"https://cdn.pixabay.com/photo/2025/03/31/15/31/mountains-9504977_1280.jpg",
+        "stock":7,
+        "categoria":"Surrealismo"
+    },
+    {
+        "id":20,
+        "titulo":"Traves\u00eda Estelar",
+        "descripcion":"Viaje c\u00f3smico representado en tonos gal\u00e1cticos.",
+        "precio":8893,
+        "medidas":"50x50 cm",
+        "url":"https://cdn.pixabay.com/photo/2011/12/14/12/17/galaxy-11098_1280.jpg",
+        "stock":1,
+        "categoria":"Astral"
+    }
+]
