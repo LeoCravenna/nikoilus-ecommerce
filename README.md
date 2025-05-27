@@ -1,54 +1,88 @@
-# React + TypeScript + Vite
+🛍️ Nikoilus E-commerce
+Proyecto web de e-commerce desarrollado con React, Vite y JavaScript.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Tecnologías
+⚛️ React 19
 
-Currently, two official plugins are available:
+⚡ Vite 6
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📦 React Router DOM 7
 
-## Expanding the ESLint configuration
+🎨 CSS personalizado
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔎 ESLint (con plugins para React y React Hooks)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+📂 Estructura del proyecto
+css
+Copiar
+Editar
+src/
+├── components/        → Componentes reutilizables (Header, Cart, etc.)
+├── pages/             → Páginas principales (Home, AboutUs, etc.)
+├── data/              → Datos JSON simulando API
+├── App.jsx            → Componente principal
+├── main.jsx           → Punto de entrada
+├── index.css          → Estilos globales
+💻 Instalación y uso
+Clonar el repositorio
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+bash
+Copiar
+Editar
+git clone https://github.com/tu-usuario/nikoilus-ecommerce.git
+cd nikoilus-ecommerce
+Instalar dependencias
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+bash
+Copiar
+Editar
+npm install
+Modo desarrollo
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+bash
+Copiar
+Editar
+npm run dev
+Compilar para producción
+
+bash
+Copiar
+Editar
+npm run build
+Preview de producción local
+
+bash
+Copiar
+Editar
+npm run preview
+🔍 Linting
+bash
+Copiar
+Editar
+npm run lint
+📦 Scripts disponibles
+json
+Copiar
+Editar
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "lint": "eslint ."
+}
+✨ Características principales
+Drawer lateral para carrito de compras con animaciones
+
+Productos dinámicos cargados desde un archivo JSON
+
+Navegación entre páginas usando React Router
+
+Controles de cantidad y stock por producto
+
+Diseño adaptable (responsive ready)
+
+📌 Estado del proyecto
+✅ Migrado completamente a JavaScript
+✅ Limpieza de configuraciones innecesarias de TypeScript
+✅ Listo para desarrollo o ampliación con backend (ej: Firebase, Node, etc.)
+
