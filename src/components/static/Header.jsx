@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './staticStyle.css'
 import Cart from '../Cart'
 
@@ -10,19 +10,19 @@ const Header = ({cartItems, borrarProducto}) => {
     <header>
         <nav>
             <ul>
-                <li><Link to='/' className='link'>Inicio</Link></li>
-                <li><Link to='/aboutus' className='link'>Sobre nosotros</Link></li>
-                <li><Link to='/products' className='link'>Galería de Productos</Link></li>
-                <li><Link to='/contactus' className='link'>Contactanos</Link></li>
+                <li><NavLink to='/' className='link'>Inicio</NavLink></li>
+                <li><NavLink to='/aboutus' className='link'>Sobre nosotros</NavLink></li>
+                <li><NavLink to='/products' className='link'>Galería de Productos</NavLink></li>
+                <li><NavLink to='/contactus' className='link'>Contactanos</NavLink></li>
                 <li className='cartnav'>
                   <button className='btnCart' onClick={()=> setCartOpen(true)}><i className='fa-solid fa-cart-shopping'></i></button>
                   <Cart borrarProducto={borrarProducto} cartItems={cartItems} isOpen={isCartOpen} onClose={()=> setCartOpen(false)} />
                 </li>
                 <li className='btnLogin'>
-                  <Link to='/login' className='link'><i className="fa-solid fa-right-to-bracket"></i></Link>
+                  <NavLink to='/login' className='link'><i className="fa-solid fa-right-to-bracket"></i></NavLink>
                 </li>
                 <li className='btnAdmin'>
-                  <Link to='/admin' className='link'><i className="fa-solid fa-user-tie"></i></Link>
+                  <NavLink to='/admin' className='link'><i className="fa-solid fa-user-tie"></i></NavLink>
                 </li>
             </ul>
         </nav>

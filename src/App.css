@@ -1,0 +1,4 @@
+/*Cambia el color de los NavLink del Componente Header*/
+.link.active {
+    color: rgb(252, 223, 212);
+}
