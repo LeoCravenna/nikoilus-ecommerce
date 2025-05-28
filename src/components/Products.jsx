@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './styleProducts.css'
+import { Link } from 'react-router-dom';
 
 const Products = ({producto, agregarCarrito}) => {
   const [cantidad, setCantidad] = useState(1);
@@ -27,7 +28,10 @@ const Products = ({producto, agregarCarrito}) => {
         </div>
 
         {/* <button onClick={(()=> agregarCarrito(producto))}>Agregar al carrito</button> */}
-        <button onClick={() => agregarCarrito({...producto, quantity: cantidad})}>Agregar al carrito</button>
+        {/* <button onClick={() => agregarCarrito({...producto, quantity: cantidad})}>Agregar al carrito</button> */}
+        <button style={{display: cantidad == 0 ? 'none' : 'block'}} onClick={()=> agregarCarrito({...producto, cantidad:cantidad})}>Agregar al carrito</button>
+
+        <Link to={`/products/${producto.id}`}>Ver más</Link>
     </section>
   )
 }

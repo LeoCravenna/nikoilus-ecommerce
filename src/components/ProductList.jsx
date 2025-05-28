@@ -4,7 +4,7 @@ import Products from './Products'
 const ProductList = ({productos, agregarCarrito}) => {
   return (
     <>
-        <h2>Galería de Productos</h2>
+        <h2 style={{textAlign:'center',fontSize:'30px'}}>Galería de Productos</h2>
         <div style={{display:'flex', flexWrap:'wrap', justifyContent:'space-evenly'}}>
             {
             productos.map(producto=>(

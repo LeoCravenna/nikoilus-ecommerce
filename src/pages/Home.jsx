@@ -9,16 +9,19 @@ const Home = ({cart, productos, cargando, agregarCarrito, borrarProducto}) => {
     <>
     <Header borrarProducto={borrarProducto} cartItems={cart}/>
     <main>
-        
-        <h1>Bienvenidos a mi Tienda</h1>
+      <div style={{display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+        <h1 style={{textAlign:'center'}}>Bienvenidos a Nikoilus</h1>
+      
+        <div style={{width:'70%',padding:'0 16px',textAlign:'center',border:'2px solid darkblue',borderRadius:'15px'}}> 
+          <p>Descubrí una colección única de cuadros pensados para transformar tus espacios. En Nikoilus combinamos arte, estilo y calidad para ofrecerte obras que inspiran y dan vida a cada rincón. Ya sea que busques un toque moderno, clásico o abstracto, tenemos el cuadro ideal para vos. ¡Explorá, inspirate y encontrá esa pieza especial que habla de vos!</p>
+        </div>
+      </div>  
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi consequatur sequi nesciunt sed dolorem, ad nisi veniam distinctio labore similique sit quam quisquam ex necessitatibus, id optio eos facere earum.</p>
-        {
-            cargando ? <img src={loading} alt='loading' /> : 
-            <ProductList agregarCarrito={agregarCarrito} productos={productos} />
-
-        }
-
+      {
+        cargando ? <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><img src={loading} alt='loading' /></div> : 
+        <ProductList agregarCarrito={agregarCarrito} productos={productos} />
+      }
+       
     </main>  
     
     <Footer />  

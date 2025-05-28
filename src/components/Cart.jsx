@@ -14,7 +14,7 @@ const Cart = ({cartItems, isOpen, onClose, borrarProducto}) => {
                 {cartItems.map((item,index)=> (
                     <>
                     <li key={item.id} style={{color:'black'}}>
-                        {item.titulo} - {item.precio}
+                        {item.titulo} - ${item.precio} - {item.cantidad}
                         <button onClick={()=> borrarProducto(item)}><i className='fa-solid fa-trash'></i></button>
                     </li>
                     </>

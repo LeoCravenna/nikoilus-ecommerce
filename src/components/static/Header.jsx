@@ -18,6 +18,12 @@ const Header = ({cartItems, borrarProducto}) => {
                   <button className='btnCart' onClick={()=> setCartOpen(true)}><i className='fa-solid fa-cart-shopping'></i></button>
                   <Cart borrarProducto={borrarProducto} cartItems={cartItems} isOpen={isCartOpen} onClose={()=> setCartOpen(false)} />
                 </li>
+                <li className='btnLogin'>
+                  <Link to='/login' className='link'><i className="fa-solid fa-right-to-bracket"></i></Link>
+                </li>
+                <li className='btnAdmin'>
+                  <Link to='/admin' className='link'><i className="fa-solid fa-user-tie"></i></Link>
+                </li>
             </ul>
         </nav>
     </header>

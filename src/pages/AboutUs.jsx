@@ -6,7 +6,7 @@ const AboutUs = ({cart, borrarProducto}) => {
   return (
     <>
     <Header borrarProducto={borrarProducto} cartItems={cart}/>
-      <h1>Acerca de</h1>
+      <h1 style={{textAlign:'center'}}>Acerca de Nikoilus</h1>
     <Footer />
     </>
   )

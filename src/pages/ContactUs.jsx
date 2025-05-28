@@ -6,7 +6,7 @@ const ContactUs = ({cart, borrarProducto}) => {
   return (
     <>
     <Header borrarProducto={borrarProducto} cartItems={cart}/>
-      <h1>Contacto</h1>
+      <h1 style={{textAlign:'center'}}>Contactanos</h1>
     <Footer />
     </>
   )
