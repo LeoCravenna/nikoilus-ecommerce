@@ -29,6 +29,25 @@
     padding: 16px;
 }
 
+.btnEliminarDelCarrito {
+    background-color: #f1f1f1;
+    border: 1px solid red;
+    width: 50px;
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.btnEliminarDelCarrito:hover {
+    border: 1px solid red;
+}
+
+.fa-trash {
+    color: red;
+}
+
 .cart-item {
     list-style: none;
     display: flex;

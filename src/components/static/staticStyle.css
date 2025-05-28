@@ -1,5 +1,8 @@
+body {
+    margin: 0;
+}
 nav {
-    background-color: #333;
+    background-color: #3961ce;
     color: white;
     padding: 10px;
 }
@@ -16,8 +19,13 @@ ul {
     text-decoration: none;
 }
 
+.link:hover {
+    color: rgb(252, 223, 212);
+}
+
 footer {
-    background-color: #f1f1f1;
+    background-color: #2047b3;
+    color: white;
     padding: 10px;
     text-align: center;
     margin-top: 20px;
@@ -29,5 +37,9 @@ footer {
 }
 
 .fa-cart-shopping {
-    color: red;
+    color: white;
+}
+
+.fa-cart-shopping:hover {
+    color: rgb(252, 223, 212);
 }

@@ -29,7 +29,15 @@
     object-fit: cover;
 }
 
-.nombre {
+.titulo {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.descripcion {
     font-size: 18px;
     font-weight: 600;
     color: #333333;
@@ -58,7 +66,9 @@
 }
 
 .qtyButton {
-    background-color: #e0e0e0;
+    width: 40px;
+    height: 40px;
+    background-color: #f1f1f1;
     border: none;
     padding: 6px 12px;
     border-radius: 4px;
@@ -66,4 +76,35 @@
     font-size: 18px;
     font-weight: 600;
     transition: background-color 0.2s;
+}
+
+.buttonDecrecer {
+    border: 1px solid red;
+    color: red;
+}
+.buttonDecrecer:hover {
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+.buttonIncrementar {
+    border: 1px solid green;
+    color: green;
+}
+.buttonIncrementar:hover {
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.btnAgregarCarrito {
+    background-color: #2047b3;
+    color: white;
+    margin-bottom: 5px;
+}
+.btnAgregarCarrito:hover {
+    background-color: #1a4fe0;
+    color: white;
+    margin-bottom: 5px;
 }

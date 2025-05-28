@@ -16,20 +16,18 @@ const Products = ({producto, agregarCarrito}) => {
             <img src={producto.url} alt="" className='image' />
         </div>
 
-        <h3 className='nombre'>{producto.titulo}</h3>
-        <h4 className='nombre'>{producto.descripcion}</h4>
+        <h3 className='titulo'>{producto.titulo}</h3>
+        <h4 className='descripcion'>{producto.descripcion}</h4>
         <p className='precio'>${producto.precio}</p>
         <p className='stock'>Stock: {producto.stock}</p>
 
         <div className='cantidadContainer'>
-            <button className='qtyButton' onClick={decrease}>-</button>
+            <button className='qtyButton buttonDecrecer' onClick={decrease}>-</button>
             <span>{cantidad}</span>
-            <button className='qtyButton' onClick={increase}>+</button>
+            <button className='qtyButton buttonIncrementar' onClick={increase}>+</button>
         </div>
 
-        {/* <button onClick={(()=> agregarCarrito(producto))}>Agregar al carrito</button> */}
-        {/* <button onClick={() => agregarCarrito({...producto, quantity: cantidad})}>Agregar al carrito</button> */}
-        <button style={{display: cantidad == 0 ? 'none' : 'block'}} onClick={()=> agregarCarrito({...producto, cantidad:cantidad})}>Agregar al carrito</button>
+        <button className='btnAgregarCarrito' style={{display: cantidad == 0 ? 'none' : 'block'}} onClick={()=> agregarCarrito({...producto, cantidad:cantidad})}>Agregar al carrito</button>
 
         <Link to={`/products/${producto.id}`}>Ver más</Link>
     </section>

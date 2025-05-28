@@ -15,7 +15,7 @@ const Cart = ({cartItems, isOpen, onClose, borrarProducto}) => {
                     <>
                     <li key={item.id} style={{color:'black'}}>
                         {item.titulo} - ${item.precio} - {item.cantidad}
-                        <button onClick={()=> borrarProducto(item)}><i className='fa-solid fa-trash'></i></button>
+                        <button className='btnEliminarDelCarrito' onClick={()=> borrarProducto(item)}><i className='fa-solid fa-trash'></i></button>
                     </li>
                     </>
                 ))}
