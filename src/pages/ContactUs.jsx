@@ -5,9 +5,13 @@ import Footer from '../components/static/Footer'
 const ContactUs = ({cart, borrarProducto}) => {
   return (
     <>
+    <div className="layout-container">
     <Header borrarProducto={borrarProducto} cartItems={cart}/>
-      <h1 style={{textAlign:'center'}}>Contactanos</h1>
+      <main className="main-content">
+        <h1 style={{textAlign:'center'}}>Contactanos</h1>
+      </main>  
     <Footer />
+    </div>
     </>
   )
 }

@@ -1,45 +1,258 @@
+/* Reset y estructura base */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 body {
-    margin: 0;
+  font-family: Arial, sans-serif;
 }
+
+/* Organiza toda la tienda en columnas y 
+asegura que el footer quede abajo incluso 
+si no hay suficiente contenido */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Crece automáticamente para ocupar el espacio entre Header y Footer */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-top: 60px;
+}
+
+/* Footer */
+footer {
+  background-color: #2047b3;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Navbar fijo*/
 nav {
-    background-color: #3961ce;
-    color: white;
-    padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #3961ce;
+  color: white;
+  padding: 10px 20px;
 }
-ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0;
+
+.main-header {
+  width: 100%;
+}
+
+/* Contenedor fijo del nav */
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #3961ce;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo al hacer scroll */
+.navbar-wrapper.scrolled {
+  background-color: #2f4fb1; /* más oscuro */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  transition: font-size 0.3s ease, padding 0.3s ease;
+  padding: 6px 0;
+}
+
+.logo .link {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.logo-small .link {
+  font-size: 18px;
+  padding: 0;
+}
+
+/* Enlaces del menú */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .link {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .link:hover {
-    color: rgb(252, 223, 212);
+  color: rgb(252, 223, 212);
 }
 
-footer {
-    background-color: #2047b3;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    margin-top: 20px;
-}
-
+/* Botón de carrito */
 .btnCart {
-    background-color: transparent;
-    border: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 16px;
 }
 
 .fa-cart-shopping {
-    color: white;
+  color: white;
 }
 
 .fa-cart-shopping:hover {
-    color: rgb(252, 223, 212);
+  color: rgb(252, 223, 212);
+}
+
+/* Conteo de productos en el carrito */
+.cart-count {
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: relative;
+  top: -10px;
+  right: 10px;
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Anima las barras del menú para que se conviertan en una X al abrir el menú */
+.menu-toggle .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+  transition: 0.3s ease-in-out;
+}
+
+.menu-toggle.open .bar:nth-child(1) {
+  transform: rotate(45deg) translateY(6px);
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translateY(-6px);
+}
+
+/* Visibilidad según vista */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+/*Quita el focus de los botones al darles click*/
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #3961ce;
+    padding: 10px 0;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: slideDown 0.3s ease-in-out;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+    z-index: 1001;
+  }
+
+  /* En mobile: el carrito va junto al menú hamburguesa */
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  /* Centrar íconos dentro del menú hamburguesa abierto */
+  .nav-links li .btnCart {
+    margin-left: 0;
+  }
+}
+
+/* Animación despliegue */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
