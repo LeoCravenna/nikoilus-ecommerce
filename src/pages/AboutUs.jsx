@@ -5,9 +5,13 @@ import Footer from '../components/static/Footer'
 const AboutUs = ({cart, borrarProducto}) => {
   return (
     <>
+    <div className="layout-container">
     <Header borrarProducto={borrarProducto} cartItems={cart}/>
-      <h1 style={{textAlign:'center'}}>Acerca de Nikoilus</h1>
+      <main className="main-content">
+        <h1 style={{textAlign:'center'}}>Acerca de Nikoilus</h1>
+      </main>  
     <Footer />
+    </div>
     </>
   )
 }
