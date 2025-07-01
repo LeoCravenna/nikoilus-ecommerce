@@ -1,19 +1,17 @@
-import React from 'react'
-import Header from '../components/static/Header'
-import Footer from '../components/static/Footer'
+import React from 'react';
+import Header from '../components/static/Header';
+import Footer from '../components/static/Footer';
 
-const ContactUs = ({cart, borrarProducto}) => {
+const ContactUs = () => {
   return (
-    <>
     <div className="layout-container">
-    <Header borrarProducto={borrarProducto} cartItems={cart}/>
+      <Header />
       <main className="main-content">
-        <h1 style={{textAlign:'center'}}>Contactanos</h1>
-      </main>  
-    <Footer />
+        <h1 style={{ textAlign: 'center' }}>Contactanos</h1>
+      </main>
+      <Footer />
     </div>
-    </>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;

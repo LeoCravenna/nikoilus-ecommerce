@@ -1,0 +1,63 @@
+.notfound-container {
+  text-align: center;
+  padding: 40px 20px;
+  animation: fadeIn 0.6s ease-in;
+}
+
+.notfound-title {
+  font-size: 42px;
+  margin-bottom: 16px;
+  color: #2047b3;
+  font-family: 'Georgia', serif;
+}
+
+.notfound-message {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.notfound-frame {
+  font-size: 80px;
+  margin-bottom: 30px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.notfound-button {
+  display: inline-block;
+  background-color: #2047b3;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.notfound-button:hover {
+  background-color: #1a4fe0;
+  color: white;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

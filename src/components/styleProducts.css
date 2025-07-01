@@ -1,120 +1,133 @@
 .card {
-    width: 400px;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    transition: box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
 .imageContainer {
-    width: 300px;
-    height: 180px;
-    background-color: #f0f0f0;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
+  width: 300px;
+  height: 180px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .image {
   width: 100%;
   height: auto;
   transition: opacity 0.3s ease-in-out;
+  object-fit: cover;
 }
 
 .titulo {
-    font-size: 22px;
-    font-weight: 600;
-    color: #333333;
-    margin-bottom: 0px;
-    text-align: center;
-}
-
-.descripcion {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333333;
-    margin-bottom: 4px;
-    text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0px;
+  text-align: center;
 }
 
 .precio {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2563eb;
-    margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 4px;
 }
 
 .stock {
-    font-size: 13px;
-    color: #666666;
-    margin-bottom: 12px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
 }
 
 .cantidadContainer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .qtyButton {
-    width: 40px;
-    height: 40px;
-    background-color: #f1f1f1;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    transition: background-color 0.2s;
+  width: 40px;
+  height: 40px;
+  background-color: #f1f1f1;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.qtyButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .buttonDecrecer {
-    border: 1px solid red;
-    color: red;
+  border: 1px solid red;
+  color: red;
 }
-.buttonDecrecer:hover {
-    background-color: red;
-    color: white;
-    border: none;
+.buttonDecrecer:hover:not(:disabled) {
+  background-color: red;
+  color: white;
+  border: none;
 }
 
 .buttonIncrementar {
-    border: 1px solid green;
-    color: green;
+  border: 1px solid green;
+  color: green;
 }
-.buttonIncrementar:hover {
-    background-color: green;
-    color: white;
-    border: none;
+.buttonIncrementar:hover:not(:disabled) {
+  background-color: green;
+  color: white;
+  border: none;
 }
 
-.btnAgregarCarrito {
-    background-color: #2047b3;
-    color: white;
-    margin-bottom: 5px;
+.btn-agregar {
+  padding: 0.8rem 1.5rem;
+  background-color: #2047b3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
-.btnAgregarCarrito:hover {
-    background-color: #1a4fe0;
-    color: white;
-    margin-bottom: 5px;
+
+.btn-agregar:hover:not(:disabled) {
+  background-color: #1a4fe0;
+}
+
+.btn-agregar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .btn-agregar-wrapper {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
+  align-items: center;
 }
 
 .stock-alert {
@@ -127,7 +140,7 @@
 }
 
 .btn-stock-maximo {
-  background-color: #ffa500 !important; /* naranja */
+  background-color: #ffa500 !important;
   color: #000;
 }
 
@@ -135,13 +148,23 @@
   background-color: #e69500 !important;
 }
 
-/* .btnAgregarCarrito.actualizar {
-  background-color: #ffc107;
-  color: black;
-}
+/* Responsive */
+@media (max-width: 480px) {
+  .imageContainer {
+    width: 100%;
+    height: 160px;
+  }
 
-.btnAgregarCarrito.agregado {
-  background-color: #28a745;
-  color: white;
-  cursor: default;
-} */
+  .card {
+    padding: 12px;
+  }
+
+  .qtyButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .titulo {
+    font-size: 20px;
+  }
+}

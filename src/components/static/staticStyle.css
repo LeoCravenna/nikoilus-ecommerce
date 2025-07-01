@@ -48,7 +48,7 @@ nav {
   z-index: 999;
   background-color: #3961ce;
   color: white;
-  padding: 10px 20px;
+  padding: 2px 20px;
 }
 
 .main-header {
@@ -94,6 +94,17 @@ nav {
 .logo-small .link {
   font-size: 18px;
   padding: 0;
+}
+
+.logo-img {
+  height: 40px;
+  width: 220px;
+  object-fit: cover;
+  transition: height 0.3s ease;
+}
+
+.logo-small .logo-img {
+  height: 30px;
 }
 
 /* Enlaces del menú */
@@ -243,16 +254,26 @@ button:focus-visible {
   .nav-links li .btnCart {
     margin-left: 0;
   }
+
+  /* Navbar fijo*/
+  nav {
+    padding: 0px 10px;
+  }
+
+  .logo-img {
+    height: 30px;
+    width: 150px;
+  }
 }
 
 /* Animación despliegue */
 @keyframes slideDown {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
