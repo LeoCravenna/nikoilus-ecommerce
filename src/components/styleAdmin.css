@@ -1,3 +1,46 @@
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #3961ce;
+  color: white;
+  padding: 8px 20px;
+}
+
+.admin-logo {
+  height: 40px;
+}
+
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-label {
+  font-weight: bold;
+}
+
+.btn-logout {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none; 
+  font-weight: bold;
+  cursor: pointer;
+  /* margin-bottom: 10px; */
+}
+
+.btn-logout:hover {
+  background-color: #c9302c;
+}
+
 /* Título */
 .admin-title {
   font-size: 36px;
@@ -7,12 +50,36 @@
   font-weight: bold;
 }
 
+.btn-toggle-form {
+  background-color: #2047b3;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn-toggle-form:hover {
+  background-color: #163a93;
+}
+
+.btn-toggle-form.active {
+  background-color: #17a2b8;
+}
+
+.btn-toggle-form.active:hover {
+  background-color: #138496;
+}
+
 /* Formulario */
 .admin-form {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-bottom: 40px;
+  /*margin-bottom: 40px;*/
   background-color: #f5f7ff;
   padding: 20px;
   border-radius: 12px;
@@ -76,16 +143,6 @@
   margin-top: 10px;
 }
 
-.btn-deletePreview {
-  background-color: #d60000 !important;
-  color: white;
-  width: 50px;
-}
-
-.btn-deletePreview:hover {
-  background-color: #a80000 !important;
-}
-
 .btn-cancelar {
   background-color: #ffc107 !important;
   color: black !important;
@@ -113,31 +170,29 @@
 }
 
 /* Imagen con botón para eliminar */
-.preview-container {
+.image-preview {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.preview-container img {
+.image-preview img {
   width: 100px;
   height: auto;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
 
-.preview-container button {
-  background-color: #d9534f;
+.image-preview button {
+  background-color: #d60000 !important;
   color: white;
-  border: none;
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 6px;
+  font-size: 24px;
+  padding: 4px 12px;
   cursor: pointer;
 }
 
-.preview-container button:hover {
-  background-color: #c9302c;
+.image-preview button:hover {
+  background-color: #a80000;
 }
 
 /* Spinner de carga */
@@ -152,9 +207,7 @@
   margin-left: 8px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+
 
 /* Lista de productos */
 .admin-product-list {
@@ -257,6 +310,63 @@
 
 .admin-actions button:last-child:hover {
   background-color: #a80000;
+}
+
+.admin-form.animate {
+  animation: fadeSlideDown 0.4s ease forwards;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 600px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeSlideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive */

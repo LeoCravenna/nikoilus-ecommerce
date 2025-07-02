@@ -37,14 +37,14 @@ const Products = ({ producto }) => {
         {hover ? (
           <Carousel showThumbs={false} infiniteLoop autoPlay>
             <div>
-              <img src={producto.pictureUrl2} alt={producto.title} className='image' />
+              <img src={producto.pictureUrl} alt={producto.title} className='image' />
             </div>
             <div>
-              <img src={producto.pictureUrl} alt={`${producto.title} 2`} className='image' />
+              <img src={producto.pictureUrl2} alt={`${producto.title} 2`} className='image' />
             </div>
           </Carousel>
         ) : (
-          <img src={producto.pictureUrl2} alt={producto.title} className="image" />
+          <img src={producto.pictureUrl} alt={producto.title} className="image" />
         )}
       </div>
 
