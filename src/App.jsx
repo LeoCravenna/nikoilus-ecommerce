@@ -10,10 +10,13 @@ import ProductDetail from './pages/ProductDetail'
 import RutasProtegida from './auth/RutasProtegidas'
 import Admin from './pages/Admin'
 import Login from './pages/Login'
+import SignUp from './pages/SignUp';
 
 //Firebase para la colección de productos
 import { collection, getDocs } from 'firebase/firestore'
 import db from './firebase/firebase'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase/firebase';
 
 //Context
 import { CartProvider } from './context/CartContext';
@@ -26,8 +29,19 @@ function App() {
   const [productos, setProductos] = useState([]) //Estado de productos
   const [cargando, setCargando] = useState(true) //Estado carga de productos
   const [error, setError] = useState(false) //Estado api
-  const [isAuthenticated, setIsAuth] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
+  // Escucha si el usuario está autenticado
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setIsAuthenticated(!!currentUser);
+      setUser(currentUser);
+    });
+    return () => unsubscribe(); // Limpieza del listener
+  }, []);
+
+  // Carga productos
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,11 +73,16 @@ function App() {
             <Route path='/products' element={<GalleryProducts productos={productos} cargando={cargando} />} />
             <Route path='/products/:id' element={<ProductDetail productos={productos} />} />
             <Route path='/contactUs' element={<ContactUs />} />
-            <Route path='/admin' element={
-              <RutasProtegida isAuthenticated={isAuthenticated}>
-                <Admin />
-              </RutasProtegida>} />
-            <Route path='/login' element={<Login />} />
+            <Route
+              path='/admin'
+              element={
+                <RutasProtegida isAuthenticated={isAuthenticated}>
+                  <Admin user={user} />
+                </RutasProtegida>
+              }
+            />
+            <Route path='/login' element={<Login isAuthenticated={isAuthenticated} />} />
+            <Route path='/signup' element={<SignUp isAuthenticated={isAuthenticated} />} />
             <Route path='*' element={<NotFound />} />
 
 

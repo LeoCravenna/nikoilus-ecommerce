@@ -1,0 +1,132 @@
+.login-background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #dfe9f3, #ffffff), 
+              url('/background-login.jpg') no-repeat center center / cover;
+  padding: 20px;
+}
+
+.login-form {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.login-form h2 {
+  margin-bottom: 10px;
+  color: #2047b3;
+  text-align: center;
+}
+
+.login-form input {
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #2047b3;
+  outline: none;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #2047b3;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.toggle-mode {
+  background-color: #17a2b8;
+  color: white;
+  margin-top: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-mode:hover {
+  background-color: #138496;
+}
+
+.login-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #2047b3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:disabled {
+  background-color: #7d8dc4;
+  cursor: not-allowed;
+}
+
+.login-form button:hover:not(:disabled) {
+  background-color: #163a93;
+}
+
+.volver-inicio {
+  margin-top: 10px;
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  color: #2047b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.volver-inicio:hover {
+  color: #163a93;
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-form {
+    padding: 25px 20px;
+  }
+}
