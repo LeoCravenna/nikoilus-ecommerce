@@ -19,7 +19,7 @@
 .admin-header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
 .admin-label {
@@ -39,6 +39,22 @@
 
 .btn-logout:hover {
   background-color: #c9302c;
+}
+
+.btn-ir-tienda {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none; 
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* margin-bottom: 10px; */
+}
+
+.btn-ir-tienda:hover {
+  background-color: #388e3c;
 }
 
 /* Título */

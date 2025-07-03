@@ -415,8 +415,13 @@ const Admin = () => {
             <img src={logo} alt="Nikoilus logo" className="logo-img" />
         </div>
         <div className="admin-header-right">
-            <span className="admin-label">Admin</span>
-            <button onClick={handleLogout} className="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
+            <span className="admin-label">Admin</span>    
+            <button onClick={() => navigate('/')} className="btn-ir-tienda">
+                Ir a la tienda
+            </button>
+            <button onClick={handleLogout} className="btn-logout">
+                <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+            </button>
         </div>
       </header>
       <main className="main-content admin-panel">
