@@ -184,10 +184,10 @@
 }
 
 .image-preview button {
-  background-color: #d60000 !important;
+  background-color: #d60000;
   color: white;
-  font-size: 24px;
-  padding: 4px 12px;
+  font-size: 18px;
+  padding: 12px 15px;
   cursor: pointer;
 }
 
@@ -345,6 +345,88 @@
   position: relative;
   overflow-y: auto;
   max-height: 90vh;
+}
+
+.input-error {
+  border: 2px solid #d9534f;
+  background-color: #fff5f5;
+}
+
+.form-error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/*Filtros y Paginación*/
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+.input-style {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 250px;
+}
+.input-style:focus {
+  border-color: #2047b3;
+  outline: none;
+}
+
+.pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.page-btn {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f4f4f4;
+  cursor: pointer;
+}
+.page-btn.active {
+  background-color: #2047b3;
+  color: white;
+  font-weight: bold;
+}
+
+/*Loader para cuando se crea un producto*/
+.saving-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.saving-spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #2047b3;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.saving-text {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2047b3;
 }
 
 /* Animations */
