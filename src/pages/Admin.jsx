@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
-import { signOut } from 'firebase/auth';
-import db, { auth } from '../firebase/firebase';
+import db from '../firebase/firebase';
+import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
 import '../components/styleAdmin.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo_nikoilus.png';
 import Swal from 'sweetalert2';
 
 const Admin = () => {
@@ -28,7 +27,6 @@ const Admin = () => {
     preview2: ''
   });
   const [errors, setErrors] = useState({});
-  //const [formVisible, setFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [uploadingImage1, setUploadingImage1] = useState(false);
   const [uploadingImage2, setUploadingImage2] = useState(false);
@@ -38,7 +36,6 @@ const Admin = () => {
   const fileInput1Ref = useRef(null);
   const fileInput2Ref = useRef(null);
   const formRef = useRef(null);
-
   const productosRef = collection(db, 'productos');
   const navigate = useNavigate();
 
@@ -48,7 +45,7 @@ const Admin = () => {
 
   const fetchProducts = async () => {
     try {
-      const q = query(productosRef, orderBy('createdAt', 'asc')); // ordena por fecha ascendente
+      const q = query(productosRef, orderBy('createdAt', 'asc'));
       const querySnapshot = await getDocs(q);
       const productosData = querySnapshot.docs.map(doc => ({
         id: doc.id,
@@ -373,13 +370,13 @@ const Admin = () => {
     setShowModal(false);
   };
 
-  const handleResetForm = () => {
-    if (window.confirm("¿Seguro que querés limpiar todos los campos?")) {
-      handleCancelEdit();
-      toast.info('Formulario reseteado');
-    }
-  };
-
+  /* const handleResetForm = () => {
+        if (window.confirm("¿Seguro que querés limpiar todos los campos?")) {
+        handleCancelEdit();
+        toast.info('Formulario reseteado');
+        }
+    } */
+  /* 
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -389,7 +386,7 @@ const Admin = () => {
       console.error('Error al cerrar sesión:', error);
       toast.error("Error al cerrar sesión");
     }
-  };
+  }; */
 
   // Filtrado
   const filteredProducts = products.filter(product => {
@@ -409,21 +406,7 @@ const Admin = () => {
 
   return (
     <div className="layout-container">
-      {/* <Header /> */}
-      <header className="admin-header">
-        <div className="admin-header-left">
-            <img src={logo} alt="Nikoilus logo" className="logo-img" />
-        </div>
-        <div className="admin-header-right">
-            <span className="admin-label">Admin</span>    
-            <button onClick={() => navigate('/')} className="btn-ir-tienda">
-                Ir a la tienda
-            </button>
-            <button onClick={handleLogout} className="btn-logout">
-                <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-            </button>
-        </div>
-      </header>
+      <Header />
       <main className="main-content admin-panel">
         <h1 className="admin-title">Panel Administrativo</h1>
 

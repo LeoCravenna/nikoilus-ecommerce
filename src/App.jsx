@@ -7,19 +7,17 @@ import GalleryProducts from './pages/GalleryProducts'
 import ContactUs from './pages/ContactUs'
 import NotFound from './pages/NotFound'
 import ProductDetail from './pages/ProductDetail'
-import RutasProtegida from './auth/RutasProtegidas'
 import Admin from './pages/Admin'
 import Login from './pages/Login'
-import SignUp from './pages/SignUp';
 
 //Firebase para la colección de productos
 import { collection, getDocs } from 'firebase/firestore'
 import db from './firebase/firebase'
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase/firebase';
 
 //Context
+import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import PrivateRoute from './auth/PrivateRoute';
 
 //Alertas
 import { ToastContainer } from 'react-toastify';
@@ -29,17 +27,6 @@ function App() {
   const [productos, setProductos] = useState([]) //Estado de productos
   const [cargando, setCargando] = useState(true) //Estado carga de productos
   const [error, setError] = useState(false) //Estado api
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
-
-  // Escucha si el usuario está autenticado
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setIsAuthenticated(!!currentUser);
-      setUser(currentUser);
-    });
-    return () => unsubscribe(); // Limpieza del listener
-  }, []);
 
   // Carga productos
   useEffect(() => {
@@ -65,40 +52,30 @@ function App() {
 
   return (
     <>
-      <CartProvider>
-        <Router>
-          <Routes>
-            <Route path='/' element={<Home productos={productos} cargando={cargando} />} />
-            <Route path='/aboutus' element={<AboutUs />} />
-            <Route path='/products' element={<GalleryProducts productos={productos} cargando={cargando} />} />
-            <Route path='/products/:id' element={<ProductDetail productos={productos} />} />
-            <Route path='/contactUs' element={<ContactUs />} />
-            <Route
-              path='/admin'
-              element={
-                <RutasProtegida isAuthenticated={isAuthenticated}>
-                  <Admin user={user} />
-                </RutasProtegida>
-              }
-            />
-            <Route path='/login' element={<Login isAuthenticated={isAuthenticated} />} />
-            <Route path='/signup' element={<SignUp isAuthenticated={isAuthenticated} />} />
-            <Route path='*' element={<NotFound />} />
-
-
-            {/* <Route path='/' element={<Home borrarProducto={handleDeleteFromCart} agregarCarrito={handleAddToCart} cart={cart} productos={productos} cargando={cargando} />} />
-            <Route path='/aboutus' element={<AboutUs borrarProducto={handleDeleteFromCart} cart={cart}/>} />
-            <Route path='/products' element={<GalleryProducts borrarProducto={handleDeleteFromCart} agregarCarrito={handleAddToCart} cart={cart} productos={productos} cargando={cargando} />} />
-            <Route path='/products/:id' element={<ProductDetail productos={productos} agregarCarrito={handleAddToCart} />} />
-            <Route path='/contactUs' element={<ContactUs borrarProducto={handleDeleteFromCart} cart={cart} />} />
-            <Route path='/admin' element={<RutasProtegida isAuthenticated={isAuthenticated}> <Admin /> </RutasProtegida>} />
-            <Route path='/login' element={<Login />} />
-            <Route path='*' element={<NotFound />} /> */}
-
-          </Routes>
-        </Router>
-        <ToastContainer position="bottom-right" autoClose={2000} />
-      </CartProvider>  
+      <AuthProvider>
+        <CartProvider>
+          <Router>
+            <Routes>
+              <Route path='/' element={<Home productos={productos} cargando={cargando} />} />
+              <Route path='/aboutus' element={<AboutUs />} />
+              <Route path='/products' element={<GalleryProducts productos={productos} cargando={cargando} />} />
+              <Route path='/products/:id' element={<ProductDetail productos={productos} />} />
+              <Route path='/contactUs' element={<ContactUs />} />
+              <Route
+                path='/admin'
+                element={
+                  <PrivateRoute roleRequired="admin">
+                    <Admin />
+                  </PrivateRoute>
+                }
+              />
+              <Route path='/login' element={<Login />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </Router>
+          <ToastContainer position="bottom-right" autoClose={2000} />
+        </CartProvider>
+      </AuthProvider>    
     </>
   )
 }

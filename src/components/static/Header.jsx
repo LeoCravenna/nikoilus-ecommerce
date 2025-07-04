@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate  } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './staticStyle.css';
 import Cart from '../Cart';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import logo from '../../assets/logo_nikoilus.png';
-
+import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import db from '../../firebase/firebase';
 import { toast } from 'react-toastify';
 
 const Header = () => {
   const [isCartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   const { cart } = useCart();
-
-  const [user, setUser] = useState(null);
-  const [rol, setRol] = useState(null);
+  const { user, rol } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const isAdminPanel = location.pathname === '/admin';
   const totalItems = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
-  //scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -32,34 +30,13 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  //Autenticación
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        const q = query(collection(db, 'usuarios'), where('email', '==', currentUser.email));
-        const snapshot = await getDocs(q);
-        if (!snapshot.empty) {
-          setRol(snapshot.docs[0].data().rol);
-        }
-      } else {
-        setUser(null);
-        setRol(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setUser(null);
-      setRol(null);
-      toast.info("Sesión cerrada");
+      toast.info('Sesión cerrada correctamente');
       navigate('/');
     } catch (error) {
-      toast.error("Error al cerrar sesión");
+      toast.error('Error al cerrar sesión');
     }
   };
 
@@ -75,101 +52,102 @@ const Header = () => {
             </NavLink>
           </div>
 
-          {/* Mobile: Cart + Hamburger Menu */}
-          <div className="mobile-actions">
-            <button className="btnCart mobile-only" onClick={() => setCartOpen(true)} aria-label="Abrir carrito">
-              <i className="fa-solid fa-cart-shopping"></i>
-              {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
-            </button>
-
-            <button
-              className={`menu-toggle ${menuOpen ? 'open' : ''}`}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Abrir menú"
-            >
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
-            </button>
-          </div>
-
-          {/* Navegación principal */}
-          <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <li><NavLink to='/' className='link' onClick={() => setMenuOpen(false)}>Inicio</NavLink></li>
-            <li><NavLink to='/aboutus' className='link' onClick={() => setMenuOpen(false)}>Sobre nosotros</NavLink></li>
-            <li><NavLink to='/products' className='link' onClick={() => setMenuOpen(false)}>Galería de Productos</NavLink></li>
-            <li><NavLink to='/contactus' className='link' onClick={() => setMenuOpen(false)}>Contactanos</NavLink></li>
-
-            {/* Desktop: Cart button */}
-            <li className="desktop-only">
-              <button className="btnCart" onClick={() => setCartOpen(true)} aria-label="Abrir carrito">
-                <i className="fa-solid fa-cart-shopping"></i>
-                {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
-              </button>
-            </li>
-
-            {/* Mostrar si no está logueado */}
-            {!user && (
-              <li>
-                <NavLink to='/login' className='link' onClick={() => setMenuOpen(false)} aria-label="Login">
-                  <i className="fa-solid fa-right-to-bracket"></i>
-                </NavLink>
-              </li>
-            )}
-
-            {/* Solo si es admin */}
-            {rol === 'admin' && (
-              <li className="admin-buttons">
+          {/* Admin Panel */}
+          {isAdminPanel && rol === 'admin' ? (
+            <>
+              <div className="mobile-actions">
+                <span className="admin-label">Admin</span>
                 <button
-                  className="btn-ir-panel"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    navigate('/admin');
-                  }}
+                  className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  aria-label="Abrir menú"
                 >
-                  Ir al Panel
+                  <span className="bar"></span>
+                  <span className="bar"></span>
+                  <span className="bar"></span>
                 </button>
+              </div>
 
-                <button className="btn-logout" onClick={handleLogout}>
+              <div className={`admin-header-nav ${menuOpen ? 'open' : ''}`}>
+                <button onClick={() => navigate('/')} className="btn-ir-tienda">
+                  Ir a la tienda
+                </button>
+                <button onClick={handleLogout} className="btn-logout">
                   <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
                 </button>
-              </li>
-            )}
-            {/* {rol === 'admin' && (
-              <li>
-                <NavLink to='/admin' className='link' onClick={() => setMenuOpen(false)} aria-label="Admin">
-                  <i className="fa-solid fa-user-tie"></i>
-                </NavLink>
-                <button className='btn-logout' onClick={handleLogout}>
-                  <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Cliente / Visitante */}
+              <div className="mobile-actions">
+                <button className="btnCart mobile-only" onClick={() => setCartOpen(true)} aria-label="Abrir carrito">
+                  <i className="fa-solid fa-cart-shopping"></i>
+                  {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
                 </button>
-              </li>
-            )} */}
 
-            {/* Solo si es cliente  */}
-            {rol === 'cliente' && (
-              <li className='user-info'>
-                <span className='user-label'>{rol}</span>
-                <button className='btn-logout' onClick={handleLogout}>
-                  <i className="fa-solid fa-right-from-bracket"></i> Logout
+                <button
+                  className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  aria-label="Abrir menú"
+                >
+                  <span className="bar"></span>
+                  <span className="bar"></span>
+                  <span className="bar"></span>
                 </button>
-              </li>
-            )}
+              </div>
 
-            {/* <li>
-              <NavLink to='/login' className='link' onClick={() => setMenuOpen(false)} aria-label="Login">
-                <i className="fa-solid fa-right-to-bracket"></i>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to='/admin' className='link' onClick={() => setMenuOpen(false)} aria-label="Admin">
-                <i className="fa-solid fa-user-tie"></i>
-              </NavLink>
-            </li> */}
-          </ul>
+              <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+                <li><NavLink to='/' className='link' onClick={() => setMenuOpen(false)}>Inicio</NavLink></li>
+                <li><NavLink to='/aboutus' className='link' onClick={() => setMenuOpen(false)}>Sobre nosotros</NavLink></li>
+                <li><NavLink to='/products' className='link' onClick={() => setMenuOpen(false)}>Galería de Productos</NavLink></li>
+                <li><NavLink to='/contactus' className='link' onClick={() => setMenuOpen(false)}>Contactanos</NavLink></li>
 
-          {/* Carrito lateral */}
-          <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
+                <li className="desktop-only">
+                  <button className="btnCart" onClick={() => setCartOpen(true)} aria-label="Abrir carrito">
+                    <i className="fa-solid fa-cart-shopping"></i>
+                    {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
+                  </button>
+                </li>
+
+                {!user && (
+                  <li>
+                    <NavLink to='/login' className='link' onClick={() => setMenuOpen(false)} aria-label="Login">
+                      <i className="fa-solid fa-right-to-bracket"></i>
+                    </NavLink>
+                  </li>
+                )}
+
+                {rol === 'admin' && (
+                  <li className="admin-buttons">
+                    <button
+                      className="btn-ir-panel"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        navigate('/admin');
+                      }}
+                    >
+                      Ir al Panel
+                    </button>
+                    <button className="btn-logout" onClick={handleLogout}>
+                      <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                    </button>
+                  </li>
+                )}
+
+                {rol === 'cliente' && (
+                  <li className='user-info'>
+                    <span className='user-label'>{rol}</span>
+                    <button className='btn-logout' onClick={handleLogout}>
+                      <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                    </button>
+                  </li>
+                )}
+              </ul>
+
+              <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
+            </>
+          )}
         </div>
       </nav>
     </header>
@@ -177,93 +155,3 @@ const Header = () => {
 };
 
 export default Header;
-
-/* import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import './staticStyle.css';
-import Cart from '../Cart';
-import { useCart } from '../../context/CartContext';
-import logo from '../../assets/logo_nikoilus.png';
-
-const Header = () => {
-  const [isCartOpen, setCartOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { cart } = useCart();
-
-  const totalItems = cart.reduce((acc, item) => acc + item.cantidad, 0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <header className="main-header">
-      <nav className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
-        <div className="navbar">
-
-         
-          <div className={`logo ${scrolled ? 'logo-small' : ''}`}>
-            <NavLink to="/">
-              <img src={logo} alt="Nikoilus logo" className="logo-img" />
-            </NavLink>
-          </div>
-
-          
-          <div className="mobile-actions">
-            <button className="btnCart mobile-only" onClick={() => setCartOpen(true)} aria-label="Abrir carrito">
-              <i className="fa-solid fa-cart-shopping"></i>
-              {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
-            </button>
-
-            <button
-              className={`menu-toggle ${menuOpen ? 'open' : ''}`}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Abrir menú"
-            >
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
-            </button>
-          </div>
-
-         
-          <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <li><NavLink to='/' className='link' onClick={() => setMenuOpen(false)}>Inicio</NavLink></li>
-            <li><NavLink to='/aboutus' className='link' onClick={() => setMenuOpen(false)}>Sobre nosotros</NavLink></li>
-            <li><NavLink to='/products' className='link' onClick={() => setMenuOpen(false)}>Galería de Productos</NavLink></li>
-            <li><NavLink to='/contactus' className='link' onClick={() => setMenuOpen(false)}>Contactanos</NavLink></li>
-
-           
-            <li className="desktop-only">
-              <button className="btnCart" onClick={() => setCartOpen(true)} aria-label="Abrir carrito">
-                <i className="fa-solid fa-cart-shopping"></i>
-                {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
-              </button>
-            </li>
-
-            <li>
-              <NavLink to='/login' className='link' onClick={() => setMenuOpen(false)} aria-label="Login">
-                <i className="fa-solid fa-right-to-bracket"></i>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to='/admin' className='link' onClick={() => setMenuOpen(false)} aria-label="Admin">
-                <i className="fa-solid fa-user-tie"></i>
-              </NavLink>
-            </li>
-          </ul>
-
-         
-          <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
-        </div>
-      </nav>
-    </header>
-  );
-};
-
-export default Header; */

@@ -248,6 +248,38 @@ button:focus-visible {
   box-shadow: none;
 }
 
+
+
+/*Agregado del Admin*/
+.admin-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.admin-label {
+  font-weight: bold;
+  color: white;
+}
+
+.btn-ir-tienda {
+  background-color: #337ab7;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-ir-tienda:hover {
+  background-color: #286090;
+}
+
+
+
 /* --- Responsive --- */
 @media (max-width: 1080px) {
   .navbar {
@@ -311,6 +343,35 @@ button:focus-visible {
 
   .admin-buttons {
     flex-direction: column;
+  }
+
+
+  /*Admin*/
+  .admin-header-nav {
+    display: none;
+  }
+
+  .admin-header-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto; 
+    padding: 15px 10px;
+    animation: slideDown 0.3s ease-in-out;
+    /* width: 100%;*/
+  }
+  .admin-header-nav .btn-ir-tienda,
+  .admin-header-nav .btn-logout {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    margin-left: 0;
+  }
+
+  .admin-header-nav .admin-label {
+    font-size: 16px;
+    color: white;
   }
 }
 

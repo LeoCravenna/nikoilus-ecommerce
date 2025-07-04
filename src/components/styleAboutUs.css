@@ -1,0 +1,63 @@
+.aboutus-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.aboutus-hero {
+  background-image: url('/cuadro-hero.jpg'); /* Cambiá por tu imagen */
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  position: relative;
+}
+
+.aboutus-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.aboutus-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.aboutus-subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.aboutus-content {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.aboutus-content h2 {
+  margin-top: 30px;
+  color: #2047b3;
+}
+
+.aboutus-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.aboutus-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.aboutus-content li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  padding-left: 1rem;
+  position: relative;
+}
