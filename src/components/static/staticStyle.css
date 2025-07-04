@@ -176,6 +176,28 @@ nav {
   background-color: #c9302c;
 }
 
+.btn-ir-panel {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-ir-panel:hover {
+  background-color: #388e3c;
+}
+
+/* Estilo específico para cuando ambos botones están juntos */
+.admin-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 /* Menú hamburguesa */
 .menu-toggle {
   display: none;
@@ -227,7 +249,7 @@ button:focus-visible {
 }
 
 /* --- Responsive --- */
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .navbar {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -285,6 +307,10 @@ button:focus-visible {
   .logo-img {
     height: 30px;
     width: 150px;
+  }
+
+  .admin-buttons {
+    flex-direction: column;
   }
 }
 

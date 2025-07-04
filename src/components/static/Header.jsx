@@ -119,6 +119,23 @@ const Header = () => {
 
             {/* Solo si es admin */}
             {rol === 'admin' && (
+              <li className="admin-buttons">
+                <button
+                  className="btn-ir-panel"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate('/admin');
+                  }}
+                >
+                  Ir al Panel
+                </button>
+
+                <button className="btn-logout" onClick={handleLogout}>
+                  <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                </button>
+              </li>
+            )}
+            {/* {rol === 'admin' && (
               <li>
                 <NavLink to='/admin' className='link' onClick={() => setMenuOpen(false)} aria-label="Admin">
                   <i className="fa-solid fa-user-tie"></i>
@@ -127,7 +144,7 @@ const Header = () => {
                   <i className="fa-solid fa-right-from-bracket"></i> Cerrar sesión
                 </button>
               </li>
-            )}
+            )} */}
 
             {/* Solo si es cliente  */}
             {rol === 'cliente' && (
