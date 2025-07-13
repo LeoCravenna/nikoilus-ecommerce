@@ -10,10 +10,7 @@ const AboutUs = () => {
       <main className="main-content aboutus-container">
         <section className="aboutus-hero">
           <div className="aboutus-overlay">
-            <h1>Bienvenidos a Nikoilus</h1>
-            <p className="aboutus-subtitle">
-              Donde el arte cobra vida y transforma espacios
-            </p>
+            <h1>Sobre nosotros</h1>
           </div>
         </section>
 
