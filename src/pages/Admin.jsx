@@ -23,8 +23,8 @@ const Admin = () => {
     category: '',
     image1: null,
     image2: null,
-    preview1: '',
-    preview2: ''
+    preview1: null,
+    preview2: null,
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
@@ -32,6 +32,8 @@ const Admin = () => {
   const [uploadingImage2, setUploadingImage2] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [savingProduct, setSavingProduct] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceLimits, setPriceLimits] = useState([0, 100000]);
 
   const fileInput1Ref = useRef(null);
   const fileInput2Ref = useRef(null);
@@ -52,6 +54,11 @@ const Admin = () => {
         ...doc.data(),
       }));
       setProducts(productosData);
+      const prices = productosData.map(p => p.price);
+      const min = Math.min(...prices);
+      const max = Math.max(...prices);
+      setPriceLimits([min, max]);
+      setPriceRange([min, max]);
     } catch (error) {
       console.error('Error cargando productos:', error);
     } finally {
@@ -144,6 +151,11 @@ const Admin = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'price') {
+      // Permite solo hasta dos decimales
+      if (!/^\d*\.?\d{0,2}$/.test(value)) return;
+    }
 
     setForm(prev => ({ ...prev, [name]: value }));
 
@@ -262,8 +274,8 @@ const Admin = () => {
         category: '',
         image1: null,
         image2: null,
-        preview1: '',
-        preview2: ''
+        preview1: null,
+        preview2: null,
       });
 
       if (fileInput1Ref.current) fileInput1Ref.current.value = '';
@@ -361,13 +373,23 @@ const Admin = () => {
       category: '',
       image1: null,
       image2: null,
-      preview1: '',
-      preview2: ''
+      preview1: null,
+      preview2: null,
     });
+    setErrors({});
     toast.info('Edición cancelada');
     fileInput1Ref.current.value = '';
     fileInput2Ref.current.value = '';
     setShowModal(false);
+  };
+
+  const formatPrice = (value) => {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value);
   };
 
   /* const handleResetForm = () => {
@@ -392,7 +414,8 @@ const Admin = () => {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
-    return matchesSearch && matchesCategory;
+    const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
+    return matchesSearch && matchesCategory && matchesPrice;
   });
 
   // Paginación
@@ -410,35 +433,90 @@ const Admin = () => {
       <main className="main-content admin-panel">
         <h1 className="admin-title">Panel Administrativo</h1>
 
-        <button onClick={() => setShowModal(true)} className="btn-toggle-form">
-            ➕ Agregar nuevo producto
-        </button>
+        <div className="filters-card-admin-container">
+          <section className="filters-card-admin">
+            <h3>Filtrar productos</h3>
+            <div className="filters-grid-admin">
+              <input
+                type="text"
+                placeholder="🔍 Buscar por título..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="input-style search-input"
+              />
 
-        <div className="filter-bar">
-          <input
-            type="text"
-            className="input-style"
-            placeholder="🔍 Buscar por título..."
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1); // reinicia a la primera página
-            }}
-          />
+              <select
+                className="input-style category-select"
+                value={selectedCategory}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value);
+                  setCurrentPage(1);
+                }}
+              >
+                <option value="">Todas las categorías</option>
+                <option value="sports">🏀 Deportes</option>
+                <option value="music">🎵 Música</option>
+                <option value="movie">🎬 Películas</option>
+              </select>
 
-          <select
-            className="input-style"
-            value={selectedCategory}
-            onChange={(e) => {
-              setSelectedCategory(e.target.value);
-              setCurrentPage(1);
-            }}
-          >
-            <option value="">Todas las categorías</option>
-            <option value="sports">🏀 Deportes</option>
-            <option value="music">🎵 Música</option>
-            <option value="movie">🎬 Películas</option>
-          </select>
+              <div className="price-range-wrapper">
+                <label>Rango de precio:</label>
+                <div className="range-inputs">
+                  <input
+                    type="range"
+                    min={priceLimits[0]}
+                    max={priceLimits[1]}
+                    step="0.01"
+                    value={priceRange[0]}
+                    onChange={(e) => {
+                      const updated = [...priceRange];
+                      updated[0] = Number(e.target.value);
+                      setPriceRange(updated);
+                      setCurrentPage(1);
+                    }}
+                  />
+                  <input
+                    type="range"
+                    min={priceLimits[0]}
+                    max={priceLimits[1]}
+                    step="0.01"
+                    value={priceRange[1]}
+                    onChange={(e) => {
+                      const updated = [...priceRange];
+                      updated[1] = Number(e.target.value);
+                      setPriceRange(updated);
+                      setCurrentPage(1);
+                    }}
+                  />
+                </div>
+                <div className="range-values">
+                  <span>{formatPrice(priceRange[0])}</span>
+                  <span>{formatPrice(priceRange[1])}</span>
+                </div>
+              </div>
+
+              <button
+                className="clear-filters-btn"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('');
+                  setPriceRange(priceLimits);
+                  setCurrentPage(1);
+                }}
+              >
+                Limpiar filtros
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <div className='btn-toggle-form-container'>
+          <button onClick={() => setShowModal(true)} className="btn-toggle-form">
+              ➕ Agregar nuevo producto
+          </button>
         </div>
 
         {showModal  && (
@@ -459,7 +537,7 @@ const Admin = () => {
                 <textarea name="description" placeholder="Descripción" value={form.description} onChange={handleChange} className={errors.description ? 'input-error' : ''} />
                 {errors.description && <span className="form-error">{errors.description}</span>}
                 
-                <input type="number" name="price" placeholder="Precio" value={form.price} onChange={handleChange} className={errors.price ? 'input-error' : ''} />
+                <input type="number" name="price" placeholder="Precio" value={form.price} onChange={handleChange} step="0.01" min="0" className={errors.price ? 'input-error' : ''} />
                 {errors.price && <span className="form-error">{errors.price}</span>}
                 
                 <input type="number" name="stock" placeholder="Stock" value={form.stock} onChange={handleChange} className={errors.stock ? 'input-error' : ''} />
@@ -521,12 +599,13 @@ const Admin = () => {
                                 category: '',
                                 image1: null,
                                 image2: null,
-                                preview1: '',
-                                preview2: ''
+                                preview1: null,
+                                preview2: null,
                                 });
                                 if (fileInput1Ref.current) fileInput1Ref.current.value = '';
                                 if (fileInput2Ref.current) fileInput2Ref.current.value = '';
                                 setShowModal(false);
+                                setErrors({});
                                 toast.info('Creación cancelada');
                             }}
                             >
@@ -558,11 +637,12 @@ const Admin = () => {
                                     category: '',
                                     image1: null,
                                     image2: null,
-                                    preview1: '',
-                                    preview2: ''
+                                    preview1: null,
+                                    preview2: null,
                                 });
                                 if (fileInput1Ref.current) fileInput1Ref.current.value = '';
                                 if (fileInput2Ref.current) fileInput2Ref.current.value = '';
+                                setErrors({});
                                 toast.info('Formulario reseteado');
                                 }
                             }}
@@ -579,6 +659,12 @@ const Admin = () => {
 
         {loading ? (
           <p>Cargando productos...</p>
+        ) : filteredProducts.length === 0 ? (
+          <div className="no-results-message-container">
+            <div className="no-results-message">
+              <p>No se encontraron productos que coincidan con los filtros seleccionados.</p>
+            </div>
+          </div>
         ) : (
           <>
           <ul className="admin-product-list">
@@ -594,7 +680,7 @@ const Admin = () => {
                   <span>
                     🎯 {product.category}
                   </span>
-                  <p>${product.price}</p>
+                  <p>{formatPrice(product.price)}</p>
                 </div>
                 <div className="admin-actions">
                   <button onClick={() => handleEdit(product)}><i class="fa-solid fa-pen"></i> Editar</button>

@@ -37,7 +37,7 @@
 }
 
 .aboutus-content h2 {
-  margin-top: 30px;
+  margin-top: 0px;
   color: #2047b3;
 }
 
@@ -57,4 +57,19 @@
   margin-bottom: 10px;
   padding-left: 1rem;
   position: relative;
+}
+
+.fade-transition {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

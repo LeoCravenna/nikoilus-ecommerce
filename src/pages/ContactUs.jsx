@@ -92,7 +92,7 @@ const ContactUs = () => {
             <h1>Contactanos</h1>
           </div>
         </section>
-        <div className="contact-container">
+        <div className="contact-container fade-transition">
           <h2>¿Querés contactarte con Nikoilus?</h2>
           <p className="intro">
             Estamos acá para ayudarte. Si tenés dudas, sugerencias o simplemente querés saludarnos, completá el formulario y nos pondremos en contacto lo antes posible.

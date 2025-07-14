@@ -77,19 +77,27 @@
   margin: 0;
   font-size: 16px;
   font-weight: 600;
-  color: #222; /* texto oscuro */
+  color: #222;
 }
 
 .cart-details p {
   margin: 0;
   font-size: 14px;
-  color: #333; /* texto claro sobre blanco */
+  color: #333;
+}
+
+.cart-details .stock-alert-cart {
+  font-size: 13px;
+  color: #cc3300;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .cart-controls span {
   font-size: 16px;
   font-weight: 600;
-  color: #222; /* cantidad visible */
+  color: #222;
 }
 
 .cart-controls {
@@ -99,26 +107,38 @@
   margin-top: 6px;
 }
 
-.cart-controls button {
+.qtyButtonCart {
   min-width: 24px;
-  text-align: center;
-  background-color: #f9f9f9;
+  background-color: #f1f1f1;
   padding: 4px 8px;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  /* width: 30px;
-  height: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.2s; */
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.cart-controls button:hover {
-  background-color: #ddd;
+.qtyButtonCart:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.buttonDecrecerCart {
+  border: 1px solid red;
+  color: red;
+}
+.buttonDecrecerCart:hover:not(:disabled) {
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+}
+
+.buttonIncrementarCart {
+  border: 1px solid green;
+  color: green;
+}
+.buttonIncrementarCart:hover:not(:disabled) {
+  background-color: green;
+  color: white;
+  border: 1px solid green;
 }
 
 .btnEliminarDelCarrito {
@@ -135,7 +155,7 @@
   margin-top: 20px;
   padding-top: 10px;
   text-align: right;
-  color: #111; /* texto negro */
+  color: #111;
   font-size: 18px;
   font-weight: bold;
 }

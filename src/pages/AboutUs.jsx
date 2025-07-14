@@ -14,7 +14,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        <section className="aboutus-content">
+        <section className="aboutus-content fade-transition">
           <h2>Nuestra historia</h2>
           <p>
             Nikoilus nace del deseo de fusionar pasión, diseño y arte en piezas únicas que hablen por sí solas. Amamos el poder que tiene un cuadro para cambiar por completo un ambiente y transmitir emociones. Por eso cuidamos cada detalle, desde la selección de materiales hasta la experiencia de compra.

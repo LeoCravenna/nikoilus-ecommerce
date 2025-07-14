@@ -26,6 +26,15 @@ const Products = ({ producto }) => {
     setCantidad(1);
   };
 
+  const formatPrice = (value) => {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value);
+  };
+
   return (
     <section className='card'>
       <div
@@ -34,7 +43,7 @@ const Products = ({ producto }) => {
         onMouseLeave={() => setHover(false)}
         onClick={() => setHover(true)} // Para mobile
       >
-        {hover ? (
+        {hover && producto.pictureUrl2 ? (
           <Carousel showThumbs={false} infiniteLoop autoPlay>
             <div>
               <img src={producto.pictureUrl} alt={producto.title} className='image' />
@@ -49,7 +58,7 @@ const Products = ({ producto }) => {
       </div>
 
       <h3 className='titulo'>{producto.title}</h3>
-      <p className='precio'>${producto.price}</p>
+      <p className='precio'>{formatPrice(producto.price)}</p>
       <p className='stock'>Stock: {producto.stock}</p>
 
       <div className='cantidadContainer'>

@@ -11,7 +11,7 @@ import Admin from './pages/Admin'
 import Login from './pages/Login'
 
 //Firebase para la colección de productos
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import db from './firebase/firebase'
 
 //Context
@@ -28,26 +28,25 @@ function App() {
   const [cargando, setCargando] = useState(true) //Estado carga de productos
   const [error, setError] = useState(false) //Estado api
 
-  // Carga productos
+  //Carga productos
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const productosRef = collection(db, "productos");
-        const querySnapshot = await getDocs(productosRef);
-        const productosData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setProductos(productosData);
-        setCargando(false);
-      } catch (error) {
-        console.error("Error al obtener productos de Firebase:", error);
-        setError(true);
-        setCargando(false);
-      }
-    };
+    const productosRef = collection(db, 'productos');
+    const q = query(productosRef, orderBy('createdAt', 'asc'));
 
-    fetchData();
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const productosData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setProductos(productosData);
+      setCargando(false);
+    }, (error) => {
+      console.error("Error al obtener productos de Firebase:", error);
+      setError(true);
+      setCargando(false);
+    });
+
+    return () => unsubscribe(); //Limpiar la suscripción al desmontar
   }, []);
 
   return (

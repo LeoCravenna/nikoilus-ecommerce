@@ -34,6 +34,11 @@
   font-weight: 300;
 }
 
+.ver-mas-btn-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
 .ver-mas-btn {
   background-color: #2047b3;
   color: white;
@@ -49,6 +54,7 @@
 
 .ver-mas-btn:hover {
   background-color: #163a93;
+  color: white;
   transform: translateY(-2px);
 }
 
@@ -57,6 +63,21 @@
 }
 
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-transition {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);

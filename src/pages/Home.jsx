@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
 import ProductList from '../components/ProductList';
@@ -24,25 +25,19 @@ const Home = ({ productos, cargando }) => {
           </div>
         </section>
 
-        {/* PRODUCTOS DESTACADOS */}
+        {/* Los más destacados */}
         {cargando ? (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img src={loading} alt="loading" />
           </div>
         ) : (
           <>
-            <ProductList productos={topProductos} titulo="Los más destacados" />
+            <div className="fade-transition">
+              <ProductList productos={topProductos} titulo="Los más destacados" />
+            </div>  
 
-            <div style={{ textAlign: 'center', marginTop: '30px' }}>
-              <button
-                className="ver-mas-btn animate-fade-in"
-                onClick={() => {
-                  navigate('/products');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              >
-                Ver todos los productos <i className="fa-solid fa-arrow-right-long" style={{ marginLeft: '8px' }}></i>
-              </button>
+            <div className='ver-mas-btn-container'>
+              <Link to="/products" className="ver-mas-btn animate-fade-in">Ver todos los productos <i className="fa-solid fa-arrow-right-long" style={{ marginLeft: '8px' }}></i></Link>
             </div>
           </>
         )}

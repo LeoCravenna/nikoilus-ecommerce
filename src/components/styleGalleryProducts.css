@@ -1,0 +1,157 @@
+.filters-card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.filters-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 30px 20px 0px 20px;
+  max-width: 1000px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.filters-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filters-card h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2047b3;
+}
+
+.filters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.search-input,
+.category-select{
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 220px;
+  max-width: 100%;
+}
+
+.price-range-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 100%;
+  max-width: 500px;
+  margin-top: 10px;
+}
+
+.range-inputs {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.range-inputs input[type="range"] {
+  flex: 1;
+  cursor: pointer;
+}
+
+.range-values {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  color: #555;
+  padding: 0 10px;
+}
+
+.clear-filters-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: auto 0;
+  transition: background-color 0.3s ease;
+  height: 50px;
+}
+
+.clear-filters-btn:hover {
+  background-color: #b52d3d;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.fade-transition {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pagination-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.page-button {
+  margin: 0 5px;
+  padding: 8px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-button:hover {
+  background-color: #f1f1f1;
+}
+
+.page-button.active {
+  background-color: #2047b3;
+  color: white;
+  border: 2px solid #2047b3;
+}
+
+.no-results-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.no-results-message {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  color: #555;
+  font-weight: 500;
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 0 20px;
+  width: 900px;
+}

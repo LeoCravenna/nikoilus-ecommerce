@@ -14,6 +14,15 @@ const Cart = ({ isOpen, onClose }) => {
   const calcularTotal = () =>
     cart.reduce((acc, item) => acc + item.price * item.cantidad, 0);
 
+  const formatPrice = (value) => {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value);
+  };
+
   return (
     <aside className={`cart-drawer ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
       <header className="cart-header">
@@ -42,18 +51,18 @@ const Cart = ({ isOpen, onClose }) => {
                   />
                   <div className="cart-details">
                     <h4>{item.title}</h4>
-                    <p>Precio: ${item.price}</p>
+                    <p>Precio: {formatPrice(item.price)}</p>
 
                     <div className="cart-controls">
-                      <button onClick={() => decreaseQuantity(item)} aria-label="Restar cantidad">−</button>
+                      <button className='qtyButtonCart buttonDecrecerCart' onClick={() => decreaseQuantity(item)} aria-label="Restar cantidad">−</button>
                       <span>{item.cantidad}</span>
-                      <button onClick={() => increaseQuantity(item)} aria-label="Sumar cantidad">+</button>
+                      <button className='qtyButtonCart buttonIncrementarCart' onClick={() => increaseQuantity(item)} aria-label="Sumar cantidad">+</button>
                     </div>
 
-                    <p>Subtotal: ${item.price * item.cantidad}</p>
+                    <p>Subtotal: {formatPrice(item.price * item.cantidad)}</p>
 
                     {item.cantidad === item.stock && (
-                      <p className="stock-alert">Máximo disponible en stock</p>
+                      <p className="stock-alert-cart">Máximo disponible en stock</p>
                     )}
                   </div>
 
@@ -69,7 +78,7 @@ const Cart = ({ isOpen, onClose }) => {
             </ul>
 
             <hr />
-            <h3 className="cart-total">Total: ${calcularTotal()}</h3>
+            <h3 className="cart-total">Total: {formatPrice(calcularTotal())}</h3>
             <button className="btnVaciarCarrito" onClick={clearCart}>
               Vaciar carrito
             </button>
