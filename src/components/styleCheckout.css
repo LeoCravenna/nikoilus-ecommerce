@@ -1,0 +1,14 @@
+.checkout-title {
+  text-align: center;
+  color: #2047b3;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.checkout-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}

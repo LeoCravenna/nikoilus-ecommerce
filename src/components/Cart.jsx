@@ -79,6 +79,17 @@ const Cart = ({ isOpen, onClose }) => {
 
             <hr />
             <h3 className="cart-total">Total: {formatPrice(calcularTotal())}</h3>
+            <hr />
+            <button
+              className="btnComprar"
+              onClick={() => {
+                onClose();
+                window.location.href = '/checkout';
+              }}
+            >
+              Comprar
+            </button>
+            <hr />
             <button className="btnVaciarCarrito" onClick={clearCart}>
               Vaciar carrito
             </button>

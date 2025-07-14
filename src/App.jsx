@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound'
 import ProductDetail from './pages/ProductDetail'
 import Admin from './pages/Admin'
 import Login from './pages/Login'
+import Checkout from './pages/Checkout'
 
 //Firebase para la colección de productos
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
@@ -69,6 +70,7 @@ function App() {
                 }
               />
               <Route path='/login' element={<Login />} />
+              <Route path='/checkout' element={<Checkout />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </Router>

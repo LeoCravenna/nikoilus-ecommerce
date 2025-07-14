@@ -151,8 +151,7 @@
 }
 
 .cart-total {
-  border-top: 1px solid #ddd;
-  margin-top: 20px;
+  margin-top: 10px;
   padding-top: 10px;
   text-align: right;
   color: #111;
@@ -160,15 +159,31 @@
   font-weight: bold;
 }
 
+.btnComprar {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 0px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.btnComprar:hover {
+  background-color: #218838;
+}
+
 .btnVaciarCarrito {
   background-color: #d60000;
   color: white;
-  padding: 10px 16px;
+  padding: 10px 15px;
   border: none;
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 10px;
   width: 100%;
 }
 
