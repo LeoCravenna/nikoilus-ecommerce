@@ -3,8 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #dfe9f3, #ffffff), 
-              url('/background-login.jpg') no-repeat center center / cover;
+  background: linear-gradient(to right, #dfe9f3, #ffffff) no-repeat center center / cover;
   padding: 20px;
 }
 
