@@ -20,6 +20,7 @@ const Header = () => {
   const location = useLocation();
 
   const isAdminPanel = location.pathname === '/admin';
+  const isCheckout = location.pathname === '/checkout';
   const totalItems = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const Header = () => {
           </div>
 
           {/* Admin Panel */}
-          {isAdminPanel && rol === 'admin' ? (
+          {isCheckout ? null : isAdminPanel && rol === 'admin' ? (
             <>
               <div className="mobile-actions">
                 <span className="admin-label">Admin</span>

@@ -462,9 +462,9 @@ const Admin = () => {
                 <option value="movie">🎬 Películas</option>
               </select>
 
-              <div className="price-range-wrapper">
+              <div className="price-range-wrapper-admin">
                 <label>Rango de precio:</label>
-                <div className="range-inputs">
+                <div className="range-inputs-admin">
                   <input
                     type="range"
                     min={priceLimits[0]}
@@ -492,7 +492,7 @@ const Admin = () => {
                     }}
                   />
                 </div>
-                <div className="range-values">
+                <div className="range-values-admin">
                   <span>{formatPrice(priceRange[0])}</span>
                   <span>{formatPrice(priceRange[1])}</span>
                 </div>

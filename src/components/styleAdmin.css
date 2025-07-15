@@ -438,7 +438,7 @@
   outline: none;
 }
 
-.price-range-wrapper {
+.price-range-wrapper-admin {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -448,18 +448,18 @@
   margin-top: 10px;
 }
 
-.range-inputs {
+.range-inputs-admin {
   display: flex;
   width: 100%;
   gap: 10px;
 }
 
-.range-inputs input[type="range"] {
+.range-inputs-admin input[type="range"] {
   flex: 1;
   cursor: pointer;
 }
 
-.range-values {
+.range-values-admin {
   display: flex;
   justify-content: space-between;
   width: 100%;
