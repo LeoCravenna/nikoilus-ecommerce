@@ -146,15 +146,55 @@
   color: white;
 }
 
+/*Formulario Finalizar Compra*/
 .swal2-validation-message {
   margin-top: -10px;
   margin-bottom: 10px;
 }
 
 div:where(.swal2-container) div:where(.swal2-validation-message) {
-    margin: 0.5em 0 0!important;
-    padding: 0!important;
-    background: none!important;
+  margin: 0.5em 0 0!important;
+  padding: 0!important;
+  background: none!important;
+}
+
+div:where(.swal2-container) .swal2-input {
+    margin: 10px 0 5px 0;
+}
+
+.swal2-popup {
+  max-width: 100% !important;
+  box-sizing: border-box;
+  overflow-x: hidden !important;
+}
+
+.swal2-input {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.swal2-input + span {
+  display: block;
+  width: 100%;
+  font-size: 0.75rem;
+  color: red;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.swal2-html-container {
+  overflow-x: hidden !important;
+}
+
+.swal2-actions {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+  padding: 10px 20px !important;
 }
 
 @media (max-width: 768px) {
@@ -171,5 +211,15 @@ div:where(.swal2-container) div:where(.swal2-validation-message) {
   .checkout-summary {
     position: static;
     margin-top: 20px;
+  }
+
+  .swal2-popup {
+    font-size: 14px !important;
+    padding: 1.25rem !important;
+  }
+
+  .swal2-confirm,
+  .swal2-cancel {
+    width: 100% !important;
   }
 }
