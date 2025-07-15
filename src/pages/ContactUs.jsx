@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
-import '../components/styleContact.css';
+import '../pages/styleContact.css';
 import { toast } from 'react-toastify';
 
 const ContactUs = () => {

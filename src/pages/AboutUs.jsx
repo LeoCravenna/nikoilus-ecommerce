@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
-import '../components/styleAboutUs.css';
+import '../pages/styleAboutUs.css';
 
 const AboutUs = () => {
   return (

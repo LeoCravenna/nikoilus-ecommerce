@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import '../components/styleProductDetail.css';
+import '../pages/styleProductDetail.css';
+
 import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
 import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/formatPrice';
 
 const ProductDetail = ({ productos }) => {
   const { id } = useParams();
@@ -13,22 +15,37 @@ const ProductDetail = ({ productos }) => {
   const [cantidad, setCantidad] = useState(1);
   const [hover, setHover] = useState(false);
 
+  //Busca producto por ID
   const product = productos?.find((p) => p.id === id);
   const cantidadEnCarrito = cart.find(p => p.id === product?.id)?.cantidad || 0;
 
+  //Si el listado de productos no está listo
   if (!productos || productos.length === 0) {
-    return <p style={{ textAlign: 'center' }}>Cargando producto...</p>;
+    return (
+      <>
+        <div className="layout-container">
+        <Header />
+        <main className="main-content product-detail-container">
+          <p style={{ textAlign: 'center' }}>Cargando producto...</p>;
+        </main>
+        <Footer />
+        </div>
+      </>
+    );
   }
 
+  //Si no se encuentra el producto
   if (!product) {
     return (
       <>
+        <div className="layout-container">
         <Header />
-        <div className='product-detail-container'>
+        <main className="main-content product-detail-container">
           <h2>Producto no encontrado</h2>
-          <Link to="/" className="back-button">← Volver al inicio</Link>
-        </div>
+          <Link to="/products" className="back-button">← Volver al inicio</Link>
+        </main>
         <Footer />
+        </div>
       </>
     );
   }
@@ -46,15 +63,6 @@ const ProductDetail = ({ productos }) => {
   const handleAddToCart = () => {
     addToCart({ ...product, cantidad });
     setCantidad(1);
-  };
-
-  const formatPrice = (value) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
   };
 
   return (

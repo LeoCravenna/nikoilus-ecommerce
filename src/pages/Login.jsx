@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { auth } from '../firebase/firebase';
 import db from '../firebase/firebase';
-import '../components/styleLogin.css';
+import '../pages/styleLogin.css';
 
 import { useAuth } from '../context/AuthContext';
 

@@ -248,8 +248,6 @@ button:focus-visible {
   box-shadow: none;
 }
 
-
-
 /*Agregado del Admin*/
 .admin-header-nav {
   display: flex;
@@ -277,8 +275,6 @@ button:focus-visible {
 .btn-ir-tienda:hover {
   background-color: #286090;
 }
-
-
 
 /* --- Responsive --- */
 @media (max-width: 1080px) {

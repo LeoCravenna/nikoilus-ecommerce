@@ -1,142 +1,114 @@
-🛍️ Nikoilus E-commerce
+# 🛍️ Nikoilus E-commerce
 
-Proyecto web de e-commerce desarrollado con React, Vite y JavaScript.
+Este es un proyecto de tienda online desarrollado con **React**, **Firebase**, **Vite** y otras tecnologías modernas. Permite a los usuarios explorar productos, agregarlos al carrito, generar un pedido, y para el rol administrador, gestionar productos desde un panel exclusivo.
 
-🚀 Tecnologías
+---
 
-⚛️ React 19
+## 📦 Tecnologías utilizadas
 
-⚡ Vite 6
+- React 19
+- Vite
+- Firebase (Firestore, Auth)
+- React Router DOM
+- SweetAlert2
+- React Toastify
+- Cloudinary (para almacenamiento de imágenes)
+- ESLint
 
-📦 React Router DOM 7
+---
 
-🎨 CSS personalizado
+## 🛠️ Instalación
 
-🔎 ESLint (con plugins para React y React Hooks)
+1. **Cloná el repositorio:**
 
-📂 Estructura del proyecto
-
-css
-
-Copiar
-
-Editar
-
-src/
-
-├── components/        → Componentes reutilizables (Header, Cart, etc.)
-
-├── pages/             → Páginas principales (Home, AboutUs, etc.)
-
-├── data/              → Datos JSON simulando API
-
-├── App.jsx            → Componente principal
-
-├── main.jsx           → Punto de entrada
-
-├── index.css          → Estilos globales
-
-💻 Instalación y uso
-
-Clonar el repositorio
-
-bash
-
-Copiar
-
-Editar
-
+```bash
 git clone https://github.com/tu-usuario/nikoilus-ecommerce.git
-
 cd nikoilus-ecommerce
 
-Instalar dependencias
-
-bash
-
-Copiar
-
-Editar
+2. **Instalá las dependencias:**
 
 npm install
 
-Modo desarrollo
+3. **Configurá el archivo .env :**
 
-bash
+Debés crear un archivo .env en la raíz del proyecto y agregar tu API key de Firebase:
+VITE_FIREBASE_API_KEY=tu_api_key
+VITE_FIREBASE_AUTH_DOMAIN=tu_auth_domain
+VITE_FIREBASE_PROJECT_ID=tu_project_id
+VITE_FIREBASE_STORAGE_BUCKET=tu_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=tu_sender_id
+VITE_FIREBASE_APP_ID=tu_app_id
+VITE_FIREBASE_MEASUREMENT_ID=tu_measurement_id
 
-Copiar
-
-Editar
+4. **Ejecutá el entorno de desarrollo:**
 
 npm run dev
 
-Compilar para producción
+La aplicación estará disponible en http://localhost:5173.
 
-bash
+---
 
-Copiar
+## ✨ Funcionalidades principales
+ 
+👥 Roles
 
-Editar
+Cliente: puede navegar, agregar productos al carrito, confirmar compra.
 
-npm run build
+Administrador: puede acceder al panel /admin para crear, editar y eliminar productos.
 
-Preview de producción local
+🛒 Funciones de cliente
 
-bash
+Carrito persistente (usando Context API)
 
-Copiar
+Vista de detalle de productos
 
-Editar
+Checkout con validaciones
 
-npm run preview
+Confirmación visual del pedido
 
-🔍 Linting
+Generación de orden en Firebase
 
-bash
+🔐 Panel de administración
 
-Copiar
+Filtro por nombre, categoría y rango de precio
 
-Editar
+Agregar, editar o eliminar productos
 
-npm run lint
+Carga de imágenes a Cloudinary
 
-📦 Scripts disponibles
+Vista previa de imágenes antes de guardar
 
-json
+Feedback visual (toasts, loaders y alertas)
 
-Copiar
+---
 
-Editar
+## 📁 Estructura del proyecto
 
-"scripts": {
+src/
+├── assets/              # Imágenes y recursos estáticos
+├── auth/                # Rutas protegidas por rol
+├── components/          # Componentes reutilizables (Header, Footer, Cart, etc.)
+├── context/             # Context API para carrito y autenticación
+├── firebase/            # Configuración de Firebase
+├── pages/               # Páginas principales (Home, Login, Admin, etc.)
+├── utils/               # Funciones auxiliares como formatPrice
+├── App.jsx              # Enrutamiento general
+└── main.jsx             # Punto de entrada
 
-  "dev": "vite",
+---
 
-  "build": "vite build",
+## 🧪 Scripts disponibles
 
-  "preview": "vite preview",
+npm run dev: Ejecuta el servidor de desarrollo
 
-  "lint": "eslint ."
+npm run build: Compila el proyecto para producción
 
-}
+npm run preview: Visualiza la versión de producción localmente
 
-✨ Características principales
+npm run lint: Linter con ESLint
 
-Drawer lateral para carrito de compras con animaciones
+---
 
-Productos dinámicos cargados desde un archivo JSON
+## 📃 Licencia
 
-Navegación entre páginas usando React Router
-
-Controles de cantidad y stock por producto
-
-Diseño adaptable (responsive ready)
-
-📌 Estado del proyecto
-
-✅ Migrado completamente a JavaScript
-
-✅ Limpieza de configuraciones innecesarias de TypeScript
-
-✅ Listo para desarrollo o ampliación con backend (ej: Firebase, Node, etc.)
-
+Este proyecto está licenciado bajo la MIT License.

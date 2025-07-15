@@ -28,11 +28,11 @@
 }
 
 .cart-item-checkout {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   padding: 0;
   margin: 0 7px;
-  display: flex;
-  flex-direction: column;
   gap: 16px;
 }
 
@@ -146,7 +146,7 @@
   color: white;
 }
 
-/*Formulario Finalizar Compra*/
+/*Formulario Datos Comprador*/
 .swal2-validation-message {
   margin-top: -10px;
   margin-bottom: 10px;
@@ -195,6 +195,68 @@ div:where(.swal2-container) .swal2-input {
 .swal2-confirm,
 .swal2-cancel {
   padding: 10px 20px !important;
+}
+
+/*Resumen del pedido*/
+.swal-product-list {
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+  padding-right: 5px;
+}
+
+.swal-product-card {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.swal-product-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.swal-product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.swal-product-title {
+  font-weight: bold;
+  margin: 0;
+  color: #2047b3;
+}
+
+.swal-product-text {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.swal-product-subtotal {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #111;
+}
+
+.swal-divider {
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.swal-total {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: right;
+  margin: 0;
 }
 
 @media (max-width: 768px) {

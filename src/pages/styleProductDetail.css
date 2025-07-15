@@ -6,7 +6,7 @@
 }
 
 .product-detail-container {
-  padding: 2rem;
+  padding: 2rem!important;
   max-width: 900px;
   margin: 0 auto;
   font-family: sans-serif;

@@ -5,12 +5,12 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "fb-iluscuadros.firebaseapp.com",
-  projectId: "fb-iluscuadros",
-  storageBucket: "fb-iluscuadros.appspot.com",
-  messagingSenderId: "385731229403",
-  appId: "1:385731229403:web:1aaf7d945d420f9af1befe",
-  measurementId: "G-0X0ZTWMWR8"
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
 import '../components/styleCart.css';
-import '../components/styleCheckout.css';
+import '../pages/styleCheckout.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import db from '../firebase/firebase';
+import { formatPrice } from '../utils/formatPrice';
 
 const Checkout = () => {
   const {
@@ -20,19 +21,9 @@ const Checkout = () => {
   } = useCart();
   const navigate = useNavigate();
 
+  //Calcula el total del carrito en el checkout
   const calcularTotal = () =>
     cart.reduce((acc, item) => acc + item.price * item.cantidad, 0);
-
-  const formatPrice = (value) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
-  };
-
-  const MySwal = withReactContent(Swal);
 
   return (
     <div className="layout-container">
@@ -137,8 +128,8 @@ const Checkout = () => {
                         <span id="error4" style="color:red; font-size:12px; display:none"></span>
                       `,
                       focusConfirm: false,
-                      confirmButtonText: 'Confirmar pedido',
-                      cancelButtonText: 'Cerrar',
+                      confirmButtonText: 'Confirmar datos',
+                      cancelButtonText: 'Cancelar',
                       showCancelButton: true,
                       allowOutsideClick: false,
                       allowEscapeKey: false,
@@ -200,8 +191,40 @@ const Checkout = () => {
 
                     if (!formValues) return;
 
+                    //Mostrar resumen de confirmación antes de enviar el pedido
+                    const confirm = await Swal.fire({
+                      title: 'Resumen del pedido',
+                      html: `
+                        <div class="swal-product-list">
+                          ${cart.map(item => `
+                            <div class="swal-product-card">
+                              <img src="${item.pictureUrl}" alt="${item.title}" class="swal-product-image" />
+                              <div class="swal-product-info">
+                                <p class="swal-product-title">${item.title}</p>
+                                <p class="swal-product-text">Precio unitario: ${formatPrice(item.price)}</p>
+                                <p class="swal-product-text">Cantidad: ${item.cantidad}</p>
+                                <p class="swal-product-subtotal"><b>Subtotal:</b> ${formatPrice(item.price * item.cantidad)}</p>
+                              </div>
+                            </div>
+                          `).join('')}
+                        </div>
+                        <hr class="swal-divider" />
+                        <p class="swal-total">Total: ${formatPrice(calcularTotal())}</p>
+                      `,
+                      confirmButtonText: 'Confirmar pedido',
+                      cancelButtonText: 'Cancelar',
+                      showCancelButton: true,
+                      allowOutsideClick: false,
+                      allowEscapeKey: false,
+                      confirmButtonColor: '#2047b3',
+                      cancelButtonColor: '#dc3545',
+                      width: '600px'
+                    });
+
+                    if (!confirm.isConfirmed) return;
+
                     try {
-                      // Mostrar loading correctamente (sin await)
+                      //Mostrar loading correctamente
                       Swal.fire({
                         title: 'Generando pedido...',
                         allowOutsideClick: false,
@@ -225,7 +248,7 @@ const Checkout = () => {
                           stock: item.stock,
                         })),
                         date: Timestamp.fromDate(new Date()),
-                        total: parseFloat(calcularTotal().toFixed(2)), // ✅ Total con 2 decimales
+                        total: parseFloat(calcularTotal().toFixed(2)),
                       };
 
                       const docRef = await addDoc(collection(db, 'pedidos'), order);

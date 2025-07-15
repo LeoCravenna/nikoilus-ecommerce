@@ -1,39 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { auth } from '../firebase/firebase';
-import db from '../firebase/firebase';
+import { useAuth } from '../context/AuthContext';
 
-const RutasProtegida = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [allowAccess, setAllowAccess] = useState(false);
+const RutasProtegidas = ({ children, roleRequired }) => {
+  const { user, rol, loading } = useAuth();
 
-  useEffect(() => {
-    const checkAuthAndRole = async () => {
-      onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          const q = query(collection(db, 'usuarios'), where('email', '==', user.email));
-          const snapshot = await getDocs(q);
+  //Mientras se verifica la sesión (por ejemplo, al recargar la página), evitamos renderizar
+  if (loading) {
+    return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Verificando acceso...</p>;
+  }
 
-          if (!snapshot.empty) {
-            const rol = snapshot.docs[0].data().rol;
-            if (rol === 'admin') {
-              setAllowAccess(true);
-            }
-          }
-        }
-        setIsLoading(false);
-      });
-    };
+  //Si no hay usuario o no cumple con el rol requerido, redirige al inicio
+  if (!user || (roleRequired && rol !== roleRequired)) {
+    return <Navigate to="/" replace />;
+  }
 
-    checkAuthAndRole();
-  }, []);
-
-  if (isLoading) return <p>Cargando autenticación...</p>;
-  if (!allowAccess) return <Navigate to="/" replace />;
-
+  //Acceso permitido
   return children;
 };
 
-export default RutasProtegida;
+export default RutasProtegidas;

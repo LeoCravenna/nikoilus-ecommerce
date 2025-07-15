@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import './staticStyle.css';
-import Cart from '../Cart';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import logo from '../../assets/logo_nikoilus.png';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { toast } from 'react-toastify';
+import Cart from '../Cart';
+import logo from '../../assets/logo_nikoilus.png';
+import './staticStyle.css';
 
 const Header = () => {
   const [isCartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  //Acceso a carrito y auth
   const { cart } = useCart();
   const { user, rol } = useAuth();
+
+  //Navegación y ubicación actual
   const navigate = useNavigate();
   const location = useLocation();
 
+  //Detecta si estamos en el panel de admin o en checkout para ocultar elementos
   const isAdminPanel = location.pathname === '/admin';
   const isCheckout = location.pathname === '/checkout';
+
+  //Total de ítems en el carrito
   const totalItems = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
+  //Estilos al hacer scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -31,6 +38,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  //Función para cerrar sesión
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -45,7 +53,6 @@ const Header = () => {
     <header className="main-header">
       <nav className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
         <div className="navbar">
-
           {/* Logo */}
           <div className={`logo ${scrolled ? 'logo-small' : ''}`}>
             <NavLink to="/">

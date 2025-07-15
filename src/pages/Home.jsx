@@ -5,12 +5,10 @@ import Footer from '../components/static/Footer';
 import ProductList from '../components/ProductList';
 import loading from '../assets/loading.gif';
 import '../components/static/staticStyle.css';
-import '../components/styleHome.css';
-import { useNavigate } from 'react-router-dom';
+import '../pages/styleHome.css';
 
 const Home = ({ productos, cargando }) => {
-  const navigate = useNavigate();
-  const topProductos = productos.slice(0, 6);
+  const topProductos = productos.slice(0, 8);
 
   return (
     <div className="layout-container">

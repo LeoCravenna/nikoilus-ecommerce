@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import './styleProducts.css';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/formatPrice';
 
+//Card de producto individual
 const Products = ({ producto }) => {
   const { cart, addToCart } = useCart();
   const [cantidad, setCantidad] = useState(1);
   const [hover, setHover] = useState(false);
 
+  //Verifica cuánto de este producto ya hay en el carrito
   const cantidadEnCarrito = cart.find(p => p.id === producto.id)?.cantidad || 0;
+
+  //Cuántos quedan disponibles en base al stock y lo que ya se agregó
   const stockDisponible = producto.stock - cantidadEnCarrito;
 
   const increase = () => {
@@ -24,15 +29,6 @@ const Products = ({ producto }) => {
   const handleAddToCart = () => {
     addToCart({ ...producto, cantidad });
     setCantidad(1);
-  };
-
-  const formatPrice = (value) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
   };
 
   return (

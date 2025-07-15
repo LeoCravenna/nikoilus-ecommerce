@@ -4,7 +4,8 @@ import Footer from '../components/static/Footer';
 import ProductList from '../components/ProductList';
 import loading from '../assets/loading.gif';
 import '../components/static/staticStyle.css';
-import '../components/styleGalleryProducts.css';
+import '../pages/styleGalleryProducts.css';
+import { formatPrice } from '../utils/formatPrice';
 
 const GalleryProducts = ({ productos, cargando }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,7 +13,7 @@ const GalleryProducts = ({ productos, cargando }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [priceLimits, setPriceLimits] = useState([0, 100000]);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
 
   useEffect(() => {
     //Determina rango de precios del catálogo
@@ -23,16 +24,19 @@ const GalleryProducts = ({ productos, cargando }) => {
     setPriceRange([min, max]);
   }, [productos]);
 
+  //Cuando cambia el input de título en el filtro
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     setCurrentPage(1);
   };
 
+  //Cuando cambia el select de categoria en el filtro
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setCurrentPage(1);
   };
 
+  //Cuando cambia el rango de precios en el filtro
   const handlePriceChange = (index, value) => {
     const updated = [...priceRange];
     updated[index] = Number(value);
@@ -40,20 +44,12 @@ const GalleryProducts = ({ productos, cargando }) => {
     setCurrentPage(1);
   };
 
+  //Limpiar filtros de búsqueda
   const handleClearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('');
     setPriceRange(priceLimits);
     setCurrentPage(1);
-  };
-
-  const formatPrice = (value) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
   };
 
   //Filtro combinado
@@ -140,7 +136,7 @@ const GalleryProducts = ({ productos, cargando }) => {
             {productosFiltrados.length === 0 ? (
               <div className="no-results-message-container">
                 <div className='no-results-message'>
-                  <p>No se encontraron productos que coincidan con los filtros seleccionados.</p>
+                  <p>No se encontraron productos que coincidan con los filtros seleccionados</p>
                 </div>  
               </div>
             ) : (

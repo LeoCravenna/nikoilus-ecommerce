@@ -3,16 +3,16 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy 
 import db from '../firebase/firebase';
 import Header from '../components/static/Header';
 import Footer from '../components/static/Footer';
-import '../components/styleAdmin.css';
+import '../pages/styleAdmin.css';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { formatPrice } from '../utils/formatPrice';
 
 const Admin = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({
     id: null,
@@ -39,12 +39,12 @@ const Admin = () => {
   const fileInput2Ref = useRef(null);
   const formRef = useRef(null);
   const productosRef = collection(db, 'productos');
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
+  //Obtengo los productos
   const fetchProducts = async () => {
     try {
       const q = query(productosRef, orderBy('createdAt', 'asc'));
@@ -66,6 +66,7 @@ const Admin = () => {
     }
   };
 
+  //Agrego imagen a Cloudinary y obtengo la url para guardar en firebase
   const uploadToCloudinary = async (file, setLoadingFn) => {
     setLoadingFn(true);
     const data = new FormData();
@@ -88,6 +89,7 @@ const Admin = () => {
     }
   };
 
+  //Detecta cambio en la imagen
   const handleImageChange = (e, imageKey, previewKey) => {
     const file = e.target.files[0];
 
@@ -119,6 +121,7 @@ const Admin = () => {
     }
   };
 
+  //Elimina imagen de previsualización
   const deletePreviewImage = (previewKey, imageKey, inputRef) => {
     if (form[previewKey]) {
       URL.revokeObjectURL(form[previewKey]);
@@ -131,7 +134,7 @@ const Admin = () => {
         [imageKey]: null
       };
 
-      // Validación: si ya no hay imágenes, mostrar error
+      //Validación: si ya no hay imágenes, mostrar error
       const hasImage =
         updatedForm.image1 || updatedForm.preview1 ||
         updatedForm.image2 || updatedForm.preview2;
@@ -149,6 +152,7 @@ const Admin = () => {
     }
   };
 
+  //Detecta cambios en formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -217,6 +221,7 @@ const Admin = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  //Envio formulario para la creación de un producto
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -292,6 +297,7 @@ const Admin = () => {
     }
   };
 
+  //Abre modal de edición de un producto
   const handleEdit = (product) => {
     setForm({
         id: product.id,
@@ -308,6 +314,7 @@ const Admin = () => {
     setShowModal(true);
   };
 
+  //Elimina un producto en firebase
   const handleDelete = async (id) => {
     //const product = products.find(p => p.id === id);
 
@@ -363,6 +370,7 @@ const Admin = () => {
     }
   }; */
 
+  //Cancelan la edición de un producto
   const handleCancelEdit = () => {
     setForm({
       id: null,
@@ -383,34 +391,7 @@ const Admin = () => {
     setShowModal(false);
   };
 
-  const formatPrice = (value) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
-  };
-
-  /* const handleResetForm = () => {
-        if (window.confirm("¿Seguro que querés limpiar todos los campos?")) {
-        handleCancelEdit();
-        toast.info('Formulario reseteado');
-        }
-    } */
-  /* 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      toast.info("Sesión cerrada correctamente");
-      navigate('/login');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-      toast.error("Error al cerrar sesión");
-    }
-  }; */
-
-  // Filtrado
+  //Filtrado
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
@@ -418,7 +399,7 @@ const Admin = () => {
     return matchesSearch && matchesCategory && matchesPrice;
   });
 
-  // Paginación
+  //Paginación
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
@@ -690,7 +671,7 @@ const Admin = () => {
             ))}
           </ul>
 
-          {/* PAGINACIÓN */}
+          {/* Paginación */}
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, i) => (
               <button

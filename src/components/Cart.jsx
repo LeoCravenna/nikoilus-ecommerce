@@ -1,6 +1,7 @@
 import React from 'react';
 import './styleCart.css';
 import { useCart } from '../context/CartContext';
+import { formatPrice } from '../utils/formatPrice';
 
 const Cart = ({ isOpen, onClose }) => {
   const {
@@ -11,17 +12,9 @@ const Cart = ({ isOpen, onClose }) => {
     clearCart
   } = useCart();
 
+  //Calcula el total del carrito
   const calcularTotal = () =>
     cart.reduce((acc, item) => acc + item.price * item.cantidad, 0);
-
-  const formatPrice = (value) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
-  };
 
   return (
     <aside className={`cart-drawer ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
@@ -80,6 +73,7 @@ const Cart = ({ isOpen, onClose }) => {
             <hr />
             <h3 className="cart-total">Total: {formatPrice(calcularTotal())}</h3>
             <hr />
+
             <button
               className="btnComprar"
               onClick={() => {
@@ -89,6 +83,7 @@ const Cart = ({ isOpen, onClose }) => {
             >
               Comprar
             </button>
+
             <hr />
             <button className="btnVaciarCarrito" onClick={clearCart}>
               Vaciar carrito
