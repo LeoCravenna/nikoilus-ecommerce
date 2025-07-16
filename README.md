@@ -17,6 +17,12 @@ Este es un proyecto de tienda online desarrollado con **React**, **Firebase**, *
 
 ---
 
+## 🚀 Demo
+
+https://nikoilus.netlify.app/
+
+---
+
 ## 🛠️ Instalación
 
 1. **Cloná el repositorio:**
