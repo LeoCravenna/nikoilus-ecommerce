@@ -28,7 +28,7 @@ https://nikoilus.netlify.app/
 1. **Cloná el repositorio:**
 
 ```bash
-git clone https://github.com/tu-usuario/nikoilus-ecommerce.git
+git clone https://github.com/LeoCravenna/nikoilus-ecommerce.git
 cd nikoilus-ecommerce
 
 2. **Instalá las dependencias:**
